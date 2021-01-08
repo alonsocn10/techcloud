@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const tipoUsuarioSchema = new Schema({
 
-    nombre: String,
-    apellido: String
+    tipoUsuario: String,
+    rango: String
 });
 
 module.exports = mongoose.model('tipoUsuario', tipoUsuarioSchema);
