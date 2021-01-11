@@ -6,7 +6,7 @@ const {
     getUsuario,
     replaceUsuario,
     deleteUsuario
-} = require('../controllers/usuario');
+} = require('../controllers/usuarioctr');
 
 router.get('/', index);
 router.post('/', newUsuario);
