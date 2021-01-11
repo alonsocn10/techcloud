@@ -7,7 +7,10 @@ const CancionSchema = new Schema({
     Artista: String,
     Usuario: String,
     Genero: String,
-    Descripcion: String
+    imagen: String,
+    Descripcion: String,
+    audio: String
+    
 });
 
 module.exports = mongoose.model('cancion', CancionSchema);

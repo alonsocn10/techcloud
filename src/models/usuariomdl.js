@@ -5,15 +5,12 @@ const usuarioSchema = new Schema({
 
     nombre: String,
     apellido: String,
-    nombreUsuario: String,
     email:String,
-    edad:Number,
+    nombreUsuario: String,
     contrasenya: String,
     fechaNacimiento: Date,
-    tipoUsuario: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'tipoUsuario'
-    }]
+    tipoUsuario: Number,
+    imagen: String
 
 });
 

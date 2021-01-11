@@ -7,6 +7,8 @@ const usersRoutes = require('./routes/usuario');
 const typeUsersRoutes = require('./routes/tipoUsuario');
 const songsRoutes = require('./routes/cancion');
 const genderRoutes = require('./routes/genero');
+const artistRoutes = require('./routes/artista');
+
 
 
 
@@ -31,6 +33,8 @@ app.use('/usuarios', usersRoutes);
 app.use('/tipoUsuarios', typeUsersRoutes); 
 app.use('/cancion', songsRoutes);
 app.use('/genero', genderRoutes);
+app.use('/artista', artistRoutes);
+
 
 
 
