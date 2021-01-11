@@ -4,6 +4,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 const usersRoutes = require('./routes/usuario');
+const typeUsersRoutes = require('./routes/tipoUsuario');
+const songsRoutes = require('./routes/cancion');
+const genderRoutes = require('./routes/genero');
+
+
+
 
 mongoose.Promise=global.Promise;
 mongoose.connect('mongodb://localhost/techcloud', {
@@ -21,7 +27,13 @@ app.use(morgan('dev'));
 
 
 //routes
-app.use('/usuarios', usersRoutes) 
+app.use('/usuarios', usersRoutes);
+app.use('/tipoUsuarios', typeUsersRoutes); 
+app.use('/cancion', songsRoutes);
+app.use('/genero', genderRoutes);
+
+
+
 
 //Start process
 app.listen(app.get('port'), () => {

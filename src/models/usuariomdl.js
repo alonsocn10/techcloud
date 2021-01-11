@@ -8,6 +8,8 @@ const usuarioSchema = new Schema({
     nombreUsuario: String,
     email:String,
     edad:Number,
+    contrasenya: String,
+    fechaNacimiento: Date,
     tipoUsuario: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'tipoUsuario'
