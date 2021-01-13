@@ -9,8 +9,17 @@ const usuarioSchema = new Schema({
     nombreUsuario: String,
     contrasenya: String,
     fechaNacimiento: Date,
-    tipoUsuario: Number,
-    imagen: String
+    tipoUsuario: [{
+        type: Schema.Types.ObjectId,
+        ref :'tipoUsuario'
+
+    }],
+    imagen: String,
+    canciones: [{
+        type: Schema.Types.ObjectId,
+        ref :'cancion'
+
+    }]
 
 });
 
