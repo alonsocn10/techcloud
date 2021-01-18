@@ -6,21 +6,17 @@ const {
     getUsuario,
     replaceUsuario,
     deleteUsuario,
-    getCanciones,
-    newUsuarioSong,
-    getTipoUsuario,
-    pushTipoUsuario
+    newSong,
+    
 
 } = require('../controllers/usuarioctr');
 
 router.get('/', index);
 router.post('/', newUsuario);
-router.post('/:usuarioId/canciones', newUsuarioSong);
+router.post('/:usuarioId/canciones', newSong);
 router.get('/:usuarioId', getUsuario);
 router.put('/:usuarioId', replaceUsuario);
 router.delete('/:usuarioId', deleteUsuario)
-router.post('/:usuarioId/tipoUsuario', pushTipoUsuario);
-router.get('/:usuarioId/canciones', getCanciones);
 
 
 

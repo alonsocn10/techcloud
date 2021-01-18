@@ -41,6 +41,12 @@ module.exports = {
         await cancion.findByIdAndRemove(cancionId);
         res.status(200).json({success : true});
 
-    }
+    },
+    getUsuario: async (req, res, ) => {
+        const { cancionId } = req.params;
+        const cancions = await cancion.findById(cancionId);
+        res.status(200).json(cancions);
+
+    },
     
 }

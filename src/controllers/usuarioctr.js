@@ -43,37 +43,14 @@ module.exports = {
         res.status(200).json({success : true});
 
     },
-    getTipoUsuario: async (req, res, next) => {
-        const { usuarioId } = req.params;
-        const usuario = Usuario.findById(usuarioId);
-        res.status(200).json({success : true});
-
-    },
-    getCanciones: async (req, res, next) => {
-        const { usuarioId } = req.params;
-        const usuario = await Usuario.findById(usuarioId).populate('canciones');
-        res.status(200).json(usuario);
-
-    },
-    newUsuarioSong: async (req, res, next) => {
+    newSong: async (req, res, next) => {
         const { usuarioId } = req.params;
         const newSong = new Cancion(req.body);
         const usuario = await Usuario.findById(usuarioId);
         newSong.nomUsuario = usuario;
         await newSong.save();
-        usuario.canciones.push(newSong);
-        await usuario.save();
         res.status(201).json(newSong);
 
-
-    },
-    pushTipoUsuario: async (req, res, next) => {
-        const { usuarioId } = req.params;
-        const newTipoUsuario = new TipoUsuario(req.body);
-        const usuario = await Usuario.findById(usuarioId);
-        usuario.tipoUsuario.push(newTipoUsuario);
-        await usuario.save();
-        res.status(201).json(newTipoUsuario); 
 
     },
 }

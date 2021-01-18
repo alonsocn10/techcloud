@@ -4,14 +4,21 @@ const Schema = mongoose.Schema;
 const CancionSchema = new Schema({
 
     nombre: String,
-    Artista: String,
-    nomUsuario: [{
+    Artista: {
         type: Schema.Types.ObjectId,
-        ref :'usuario'
+        ref: 'artistas'
 
-    }],
-        Genero: String,
-    imagen: String,
+    },
+    nomUsuario: {
+        type: String,
+        ref :'nombreUsuario'
+
+    },
+    Genero: {
+        type: Number,
+        ref :'tipo'
+    },
+    imagen: Object,
     Descripcion: String,
     length  :  Number , 
     chunkSize :  Number  , 
