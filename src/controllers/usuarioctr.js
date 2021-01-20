@@ -19,7 +19,7 @@ module.exports = {
     },
     getUsuario: async (req, res, next) => {
         const { usuarioId } = req.params;
-        const usuario = await Usuario.findById(usuarioId).populate('canciones');;
+        const usuario = await Usuario.findById(usuarioId);
         res.status(200).json(usuario);
 
     },
