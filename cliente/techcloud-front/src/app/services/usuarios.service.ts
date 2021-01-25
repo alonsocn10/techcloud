@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Usuarios } from '../models/usuarios'
 import { from } from 'rxjs';
+import { Usuarios } from '../models/usuarios';
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +9,12 @@ import { from } from 'rxjs';
 export class UsuariosService {
   
 
-  selectedUsuario : Usuarios;
-  usuarioss : Usuarios[];
-  URL = "http://localhost:3000/usuarios"
-
-  constructor(private http: HttpClient) { }
+  selectedUsuario: Usuarios;
+  readonly URL = "http://localhost:3000/api/usuarios"
+  usuarios: Usuarios[] = [];
+  constructor(private http: HttpClient) { 
+    this.selectedUsuario = new Usuarios();
+  }
 
     getUsuario() {
 
@@ -21,20 +22,20 @@ export class UsuariosService {
         
     }
 
-    postUsuarios() {
+    postUsuarios(usuarios: Usuarios ) {
 
-      return this.http.post(this.URL, Usuarios);
+      return this.http.post(this.URL, usuarios);
         
     };
-    putUsuarios() {
+    putUsuarios(usuarios: Usuarios) {
 
-      return this.http.put(this.URL, '/${usuarios_id}', usuarios);
+      return this.http.put(this.URL + '/${usuarios._id}', usuarios);
         
     };
 
     deleteUsuarios(_id: string) {
 
-      return this.http.delete(this.URL, '/${_id}');
+      return this.http.delete(this.URL +'/${_id}');
         
     };
 

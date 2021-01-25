@@ -1,0 +1,33 @@
+
+<div class="container">
+  <div class="row"> 
+    <div class="col-s5"> 
+          <table>
+            <thead>
+              <th>Id</th>
+              <th>Nombre</th>
+              <th>Apellidos</th>
+              <th>Email</th>
+              <th>Nombre Usuario</th>
+              <th>Contraseña</th>
+              <th>Fecha Nacimiento</th>
+              <th>Tipo Usuario</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let usuario of usuarioService.usuarios">
+                <td>{{usuario.nombre}}</td>
+                <td>{{usuario.apellido}}</td>
+                <td>{{usuario.email}}</td>
+                <td>{{usuario.nombreUsuario}}</td>
+                <td>{{usuario.contrasenya}}</td>
+                <td>{{usuario.fechaNacimiento}}</td>
+                <td>{{usuario.tipoUsuario}}</td>
+
+
+              </tr>
+            </tbody>
+            
+        </table>
+    </div>
+</div>
+</div>

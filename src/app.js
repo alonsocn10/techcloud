@@ -9,6 +9,7 @@ const songsRoutes = require('./routes/cancion');
 const genderRoutes = require('./routes/genero');
 const artistRoutes = require('./routes/artista');
 const authRoutes = require('./routes/auth');
+const cors = require ('cors');
 
 
 
@@ -30,15 +31,16 @@ app.set('port',process.env.PORT || 3000);
 //Midleware
 app.use(bodyParser.json());
 app.use(morgan('dev'));
+app.use(cors({origin: 'http://localhost:4200'}));
 
 
 //routes
-app.use('/usuarios', usersRoutes);
-app.use('/tipoUsuarios', typeUsersRoutes); 
-app.use('/cancion', songsRoutes);
-app.use('/genero', genderRoutes);
-app.use('/artista', artistRoutes);
-app.use('/auth', authRoutes);
+app.use('/api/usuarios', usersRoutes);
+app.use('/api/tipoUsuarios', typeUsersRoutes); 
+app.use('/api/canciones', songsRoutes);
+app.use('/api/generos', genderRoutes);
+app.use('/api/artistas', artistRoutes);
+app.use('/api/auth', authRoutes);
 
 
 
