@@ -9,17 +9,16 @@
               <th>Apellidos</th>
               <th>Email</th>
               <th>Nombre Usuario</th>
-              <th>Contraseña</th>
               <th>Fecha Nacimiento</th>
               <th>Tipo Usuario</th>
             </thead>
             <tbody>
-              <tr *ngFor="let usuario of usuarioService.usuarios">
+              <tr *ngFor="let usuario of usuariosService.usuarios">
+                <td>{{usuario._id}}</td>
                 <td>{{usuario.nombre}}</td>
                 <td>{{usuario.apellido}}</td>
                 <td>{{usuario.email}}</td>
                 <td>{{usuario.nombreUsuario}}</td>
-                <td>{{usuario.contrasenya}}</td>
                 <td>{{usuario.fechaNacimiento}}</td>
                 <td>{{usuario.tipoUsuario}}</td>
 
