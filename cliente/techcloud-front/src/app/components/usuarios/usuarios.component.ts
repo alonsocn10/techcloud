@@ -4,14 +4,14 @@ import { Usuarios } from '../../models/usuarios'
 
 @Component({
   selector: 'app-usuarios',
-  templateUrl: './usuarios.view.html',
-  styleUrls: ['./usuarios.view.css'],
+  templateUrl: './usuarios.component.html',
+  styleUrls: ['./usuarios.component.css'],
   providers: [UsuariosService]
 })
 export class UsuariosComponent implements OnInit {
 
 
-  constructor(private usuariosService: UsuariosService) { }
+  constructor(public usuariosService: UsuariosService) { }
 
   ngOnInit(): void {
     this.getUsuarios();
@@ -24,5 +24,6 @@ export class UsuariosComponent implements OnInit {
       }
         )
   }
+
 
 }

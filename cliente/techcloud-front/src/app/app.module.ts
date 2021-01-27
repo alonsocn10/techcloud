@@ -8,12 +8,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { LoginComponent } from './components/login/login.component';
+import { EstiloComponent } from './components/estilo/navbar.component';
+import { HomeComponent } from './home/home.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { FondoComponent } from './components/fondo/fondo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsuariosComponent,
-    LoginComponent
+    LoginComponent,
+    EstiloComponent,
+    HomeComponent,
+    FondoComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

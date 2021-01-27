@@ -1,21 +1,20 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 //CONEXIONES
-import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { HomeComponent } from './home/home.component';
 
 //RUTAS
 const routes: Routes = [
  
   {
     path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
+    component: HomeComponent
   },
   {
     path: 'home',
-    component: AppComponent
+    component: HomeComponent
   },
   {
     path: 'login',
@@ -24,6 +23,10 @@ const routes: Routes = [
   {
     path: 'usuarios',
     component: UsuariosComponent
+  },
+  {
+    path: '**',
+    component: HomeComponent
   }
 
 ];

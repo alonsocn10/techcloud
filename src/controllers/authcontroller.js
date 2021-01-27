@@ -29,11 +29,9 @@ module.exports = {
 
     const comparacion = await usuariomdl.compare(req.body.contrasenya, userFound.contrasenya);
     if (!comparacion)
-        return res.status(400).json({ message: 'Contraseña incorrecta' });
-
-    console.log(userFound);
-
-    res.json({ token: "" });
+        return res.status(400).json({ token: null, message: 'Contraseña incorrecta' });
+        const token=jwt.sign({id: userFound._id },'config.SECRET', {expiresIn : 86400})   
+         res.json({ token });
 
 }
 }
