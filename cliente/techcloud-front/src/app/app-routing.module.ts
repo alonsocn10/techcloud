@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from './auth.guard';
 //CONEXIONES
 import { LoginComponent } from './components/login/login.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './components/home/home.component';
+import { ArtistasComponent } from './components/artistas/artistas.component';
 
 //RUTAS
 const routes: Routes = [
@@ -19,10 +21,17 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+
+  },
+  {
+    path: 'artistas',
+    component: ArtistasComponent
+
   },
   {
     path: 'usuarios',
-    component: UsuariosComponent
+    component: UsuariosComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',

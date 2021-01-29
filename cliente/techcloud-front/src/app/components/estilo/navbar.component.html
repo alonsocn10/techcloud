@@ -1,10 +1,12 @@
-<nav>
-    <ul>
-      <li><a routerLink="" routerLinkActive="active">Home</a></li>
-      <li><a routerLink="" routerLinkActive="active">Canciones</a></li>
-      <li><a routerLink="" routerLinkActive="active">Géneros</a></li>
-      <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+<nav class="navbar">
+  <ul>
+      <li><a routerLink="" routerLinkActive>Home</a></li>
+      <li><a routerLink="/artistas"  routerLinkActive>Artistas</a></li>
+      <li><a routerLink="/generos" routerLinkActive>Géneros</a></li>
+      <li><a routerLink="/canciones" routerLinkActive>Canciones</a></li>
+      <li><a routerLink="/login" *ngIf="!loginService.loggedIn" routerLinkActive>Login</a>
+        <a (click)="loginService.logOut()" *ngIf="loginService.logOut" routerLinkActive>Logout</a></li>
+
+
     </ul>
   </nav>
-
-

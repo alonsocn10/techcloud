@@ -1,0 +1,87 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+.container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+#card {
+    position: relative;
+    overflow: hidden;
+    font-family: sans-serif;
+   /* background-blend-mode: luminosity;
+    */
+   /* box-shadow: 0px 8px 20px rgba(black, 0);
+    */
+    box-shadow: 0px 0px 0px black;
+    transition: all 0.3s ease-in-out;
+    width: 600px;
+    height: 315px;
+}
+#card .meta {
+   /* margin-top: 215px;
+    */
+   /* margin-left: 40px;
+    */
+    position: absolute;
+    bottom: 20px;
+    left: 45px;
+    transform: translateY(60%);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+#card .artist {
+    font-weight: 20;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-bottom: 0;
+}
+#card .song {
+    font-weight: 15px;
+    margin-top: 0;
+    letter-spacing: 1px;
+}
+
+#card:hover .meta {
+    transform: translateY(0%);
+    opacity: 1;
+}
+#card:hover .button {
+    transform: translateY(0%);
+    opacity: 1;
+}
+.drake {
+    color: white;
+    background: #3a3a3a url('https://www.electronicbeats.net/app/uploads/2020/06/black_celebration.jpg') no-repeat center;
+    background-size: cover;
+}
+.button {
+    position: absolute;
+    right: 40px;
+    bottom: 22px;
+    padding: 15px 30px;
+    font-size: 0.9em;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    background: linear-gradient(45deg, #5f5f5f, #b6b6b6);
+    border-radius: 50px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0);
+    transition: all 0.3s ease-in-out;
+    transform: translateY(80%);
+    opacity: 0;
+}
+.button:hover {
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+}
+#music-player {
+    width: 650px;
+    height: 0px;
+    background: #00cdea;
+    transition: all 0.3s ease-in-out;
+}

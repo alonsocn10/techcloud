@@ -2,17 +2,18 @@
 <div class="cont">
   <div class="form sign-in">
     <h2>Bienvenido</h2>
-    <form name="loginForm" #loginForm="ngForm" (ngSumbit)="logIn(loginForm)" >
+    <form name="loginForm" #loginForm="ngForm" (ngSubmit)="logIn(loginForm)" >
     <label>
       <span>Nombre de Usuario</span>
-      <input name="nombreUsuario"type="text" #nombreUsusario="ngModel" [(ngModel)]="loginService.selectedLogin.nombreUsuario" >
+      <input name="nombreUsuario"type="text" #nombreUsusario="ngModel" [(ngModel)]="loginService.selectedLogin.nombreUsuario" required
+      minlength="4"/>
     </label>
     <label>
       <span>Contraseña</span>
-      <input  name="contrasenya" type="password"  #contrasenya="ngModel" [(ngModel)]="loginService.selectedLogin.contrasenya" />
+      <input  name="contrasenya" type="password"  #contrasenya="ngModel" [(ngModel)]="loginService.selectedLogin.contrasenya" required/>
     </label>
-
-    <button (ngSumbit)="logIn(loginForm)" class="submit">Log In</button>
+    <button type="submit" class="submit">Log In</button>
+   
   </form>
   </div>
   <div class="sub-cont">
@@ -57,11 +58,11 @@
         <input type="password" />
       </label>
       <button type="button" class="submit">Sign Up</button>
-      <button type="button" class="fb-btn">Join with <span>facebook</span></button>
     </div>
   </div>
 </div>
-
-
-
-
+<script>
+document.querySelector('.img__btn').addEventListener('click', function() {
+    document.querySelector('.cont').classList.toggle('s--signup');
+  });
+</script>
