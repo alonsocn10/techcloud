@@ -1,4 +1,6 @@
 const Usuario = require('../models/usuariomdl'); 
+const usuariomdl = require('../models/usuariomdl'); 
+
 
 const Cancion = require('../models/cancionmdl'); 
 const tipoUsuariomdl = require('../models/tipoUsuariomdl');
@@ -14,6 +16,8 @@ module.exports = {
     },
     newUsuario: async (req, res, next) => {
         const newUsuario = new Usuario(req.body);
+        const contra = await usuariomdl.encryptsPasswd(req.body.contrasenya);
+        newUsuario.contrasenya = contra;
         const usuario = await newUsuario.save();
         res.status(200).json(usuario);
 

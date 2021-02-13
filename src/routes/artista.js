@@ -7,12 +7,13 @@ const {
     replaceArtista,
     deleteArtista
 } = require('../controllers/artistactr');
+const { verifyToken,verifyAdmin,verifyUser } = require('../middleware/authjwt');
 
 router.get('/', index);
-router.post('/', newArtista);
+router.post('/',[verifyToken, verifyAdmin], newArtista);
 router.get('/:artistaId', getArtista);
-router.put('/:artistaId', replaceArtista);
-router.delete('/:artistaId', deleteArtista)
+router.put('/:artistaId',[verifyToken, verifyAdmin], replaceArtista);
+router.delete('/:artistaId',[verifyToken, verifyAdmin], deleteArtista)
 
 
 

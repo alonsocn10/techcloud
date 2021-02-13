@@ -13,12 +13,16 @@ input, button {
     background: none;
     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
-
+.tip {
+    font-size: 15px;
+    margin: 40px auto 50px;
+    text-align: center;
+}
 .cont {
     overflow: hidden;
     position: relative;
     width: 900px;
-    height: 700px;
+    height: 850px;
     margin: 0 auto 100px;
     background: #fff;
 }
@@ -50,7 +54,7 @@ button {
     height: 36px;
     border-radius: 30px;
     color: #fff;
-    font-size: 15px;
+    font-size: 1    5px;
     cursor: pointer;
 }
 .img {
@@ -66,11 +70,11 @@ button {
 .img:before {
     content: '';
     position: absolute;
-    left: 0;
+    right: 0;
     top: 0;
-    width: 100%;
+    width: 1050px;
     height: 100%;
-    background-image: url('https://djrankings.org/tpls/dj/images/djs_photo/michael-bibi.jpg');
+    background-image: url('https://cache.dpg.media/qfzysanzstct/images/64d86fa6-8073-11e9-8c50-de89c523159b/michael_bibi_b2b_andrea_oliva08_website_image_gdjp_standard.jpg?20190527123537');
     background-size: cover;
     transition: transform 1.2s ease-in-out;
 }
@@ -176,10 +180,10 @@ label span {
 }
 input {
     display: block;
-    width: 100%;
-    margin-top: 5px;
-    padding-bottom: 5px;
-    font-size: 16px;
+    width: 260px;
+    margin: 25px auto 0;
+    padding-bottom: 20px;
+    font-size: 14px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.4);
     text-align: center;
 }
@@ -191,7 +195,7 @@ input {
 }
 .submit {
     margin-top: 40px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     background: #d4af7a;
     text-transform: uppercase;
 }

@@ -2,7 +2,7 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 .container {
-    height: 100vh;
+    height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -55,8 +55,7 @@ body {
 }
 .drake {
     color: white;
-    background: #3a3a3a url('https://www.electronicbeats.net/app/uploads/2020/06/black_celebration.jpg') no-repeat center;
-    background-size: cover;
+    
 }
 .button {
     position: absolute;

@@ -11,9 +11,10 @@
               <th>Nombre Usuario</th>
               <th>Fecha Nacimiento</th>
               <th>Tipo Usuario</th>
+              <th>Acciones</th>
             </thead>
             <tbody>
-              <tr *ngFor="let usuario of usuariosService.usuarios">
+              <tr *ngFor="let usuario of usuariosService.usuarios | paginate: { itemsPerPage: 10, currentPage: page }" >
                 <td>{{usuario._id}}</td>
                 <td>{{usuario.nombre}}</td>
                 <td>{{usuario.apellido}}</td>
@@ -21,12 +22,19 @@
                 <td>{{usuario.nombreUsuario}}</td>
                 <td>{{usuario.fechaNacimiento}}</td>
                 <td>{{usuario.tipoUsuario}}</td>
+                <td><button  type="submit"><a routerLink="/edit/{{usuario._id}}" class="edit"><i class="material-icons">border_color</i></a></button>
+                  <button  type="submit"><a routerLink="/delete/{{usuario._id}}" class="delete"><i class="material-icons">backspace</i></a></button>
+                  <button type="submit"><a routerLink="/usuarios/new" class="new"><i class="material-icons">add_circle</i></a></button>
+
+                  </td>
 
 
               </tr>
             </tbody>
-            
+            <pagination-controls (pageChange)="page = $event"></pagination-controls>
+
         </table>
+        
     </div>
 </div>
 </div>

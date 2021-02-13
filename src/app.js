@@ -27,6 +27,7 @@ mongoose.connect('mongodb://localhost/techcloud', {
 //Settings
 app.set('port',process.env.PORT || 3000);
 
+//verifyToken
 
 //Midleware
 app.use(bodyParser.json());
@@ -35,7 +36,7 @@ app.use(cors({origin: 'http://localhost:4200'}));
 
 
 //routes
-app.use('/api/usuarios', usersRoutes);
+app.use('/api/usuarios',usersRoutes);
 app.use('/api/tipoUsuarios', typeUsersRoutes); 
 app.use('/api/canciones', songsRoutes);
 app.use('/api/generos', genderRoutes);

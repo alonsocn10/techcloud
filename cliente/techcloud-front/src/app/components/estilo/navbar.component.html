@@ -3,10 +3,11 @@
       <li><a routerLink="" routerLinkActive>Home</a></li>
       <li><a routerLink="/artistas"  routerLinkActive>Artistas</a></li>
       <li><a routerLink="/generos" routerLinkActive>Géneros</a></li>
-      <li><a routerLink="/canciones" routerLinkActive>Canciones</a></li>
-      <li><a routerLink="/login" *ngIf="!loginService.loggedIn" routerLinkActive>Login</a>
-        <a (click)="loginService.logOut()" *ngIf="loginService.logOut" routerLinkActive>Logout</a></li>
-
+      <li><a routerLink="/canciones" class="dropdown-trigger"  data-target="dropdown1" routerLinkActive>Canciones</a></li>
+      <li><a routerLink="/login" *ngIf="!loginService.loggedIn()" routerLinkActive>Login</a>
+        <a routerLink="/login" (click)="loginService.logOut()" *ngIf="loginService.loggedIn()" routerLinkActive>Logout</a></li>
+      <li><a routerLink="/usuarios"   *ngIf="loginService.loggedIn()" routerLinkActive>Usuarios</a></li>
 
     </ul>
+   
   </nav>

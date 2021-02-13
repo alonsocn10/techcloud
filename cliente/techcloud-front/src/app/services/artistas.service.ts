@@ -7,32 +7,32 @@ import { Artistas } from '../models/artistas';
 })
 export class ArtistasService {
 
-  selectedArtist: Artistas;
+  selectedArtista: Artistas;
   readonly URL = "http://localhost:3000/api/artistas"
   artistas: Artistas[] = [];
-  constructor(private http: HttpClient) { 
-    this.selectedArtist = new Artistas();
+  constructor(public http: HttpClient) { 
+    this.selectedArtista = new Artistas();
   }
 
-    getArtistas() {
+  getArtistas() {
 
-      return this.http.get(this.URL);
-        
-    }
+    return this.http.get(this.URL);
+      
+  }
 
-    postArtistas(artistas: Artistas ) {
+  postArtistas(artistas: Artistas ) {
 
-      return this.http.post(this.URL, artistas);
-        
-    };
-    putArtias(artistas: Artistas) {
+    return this.http.post(this.URL, artistas);
+      
+  };
+  putArtistas(artistas: Artistas) {
 
-      return this.http.put(this.URL + '/${artistas._id}', artistas);
-        
-    };
+    return this.http.put(this.URL + '/${artistas._id}', artistas);
+      
+  };
 
-    deleteArtistas(_id: string) {
+  deleteArtistas(_id: string) {
 
-      return this.http.delete(this.URL +'/${_id}');
-        
-    };}
+    return this.http.delete(this.URL +'/${_id}');
+      
+  };}

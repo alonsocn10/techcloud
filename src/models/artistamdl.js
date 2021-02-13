@@ -7,7 +7,10 @@ const artistaSchema = new Schema({
     genero: String,
     descripcion: String,
     imagen: String,
-    canciones: Number
+    canciones: [{
+        type: Schema.Types.ObjectId,
+        ref: 'canciones'
+    }]
 
 });
 

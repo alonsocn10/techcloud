@@ -1,22 +1,23 @@
-
-<div class="container">
-  <!-- User Card-->
-  <div class="card" *ngFor="let artista of artistasService.artistas">
-    <!-- Header -->
-    <div class="card-header">
-      <div class="card-header__avatar"></div><a href="#" class="card-header__follow">Follow</a>
-    </div>
-    <!-- Content-->
-    <div class="card-content">
-      <div class="card-content__username"></div>
-      <div class="card-content__bio"></div>
-    </div>
-    <!-- Footer-->
-    <div class="card-footer">
-       
-        <div class="label">Ver Más</div>
-      </div>
-      </div>
-    </div>
-  </div>
-</div>
+<div class="wrapper">
+	
+  <div class="cols">
+	
+			<div class="col" ontouchstart="this.classList.toggle('hover');" *ngFor="let artista of artistasService.artistas | paginate: { itemsPerPage: 9, currentPage: page }" >
+				<div class="container">
+					<div class="front" style="background-image: url({{artista.imagen}})">
+						<div class="inner">
+							<p>{{artista.nombre}}</p>
+              <span>{{artista.genero}}</span>
+						</div>
+					</div>
+					<div class="back">
+            <a routerLink="/artistas">
+						<div class="inner">
+						  <p>{{artista.descripcion}}</p>
+            </div>
+          </a>
+					</div>
+				</div>
+			</div>
+			<pagination-controls (pageChange)="page = $event"></pagination-controls>
+ </div>

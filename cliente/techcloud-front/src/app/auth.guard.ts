@@ -20,3 +20,19 @@ export class AuthGuard implements CanActivate {
     }
   }
 }
+export class loginGuard implements CanActivate {
+  
+  constructor( private loginService: LoginService, private router: Router){  }
+
+  canActivate(): boolean{
+    if(this.loginService.loggedIn()){
+      this.router.navigate(['/login'])
+
+      return true;
+
+    }else{
+      return false
+
+    }
+  }
+}

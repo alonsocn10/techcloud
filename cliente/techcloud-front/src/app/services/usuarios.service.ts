@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,  HttpHeaders,  } from '@angular/common/http';
 import { from } from 'rxjs';
 import { Usuarios } from '../models/usuarios';
 
@@ -12,17 +12,21 @@ export class UsuariosService {
   selectedUsuario: Usuarios;
   readonly URL = "http://localhost:3000/api/usuarios"
   usuarios: Usuarios[] = [];
-  constructor(private http: HttpClient) { 
+  constructor(public http: HttpClient) { 
     this.selectedUsuario = new Usuarios();
   }
 
     getUsuario() {
-
+      const token = localStorage.getItem('token')
+      const headers = new Headers()
       return this.http.get(this.URL);
         
     }
 
     postUsuarios(usuarios: Usuarios ) {
+      const token = localStorage.getItem('token')
+
+      
 
       return this.http.post(this.URL, usuarios);
         

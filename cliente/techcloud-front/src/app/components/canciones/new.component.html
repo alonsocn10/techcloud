@@ -1,0 +1,28 @@
+<div class="cont">
+    <div class="form sign-in">
+      <h2>Nueva Cancion</h2>
+      <form name="cancionForm" #cancionForm="ngForm" (ngSubmit)="newSong(cancionForm)">
+      <label>
+        <span>Nombre</span>
+        <input name="nombre" type="text" #nombre="ngModel" [(ngModel)]="cancionesService.selectedCancion.nombre"  required
+        minlength="4" maxlength="30"/>
+      </label>
+      <label>
+        <span>Genero</span>
+        <input name="Genero" type="text" #Genero="ngModel" [(ngModel)]="cancionesService.selectedCancion.Genero" required/>
+      </label>
+      <label>
+        <span>Artista</span>
+        <textarea  name="Artista" type="text" #Artista="ngModel" [(ngModel)]="cancionesService.selectedCancion.Artista"   required>
+      </textarea>
+      </label>
+      <label>
+        <span>Imagen</span>
+        <input  name="imagen" type="text" #imagen="ngModel" [(ngModel)]="cancionesService.selectedCancion.imagen"   required/>
+      </label>
+      <button type="submit" class="submit"> Guardar </button>
+      <button type="button"   class="volver"> <a routerLink="/canciones"> Volver </a> </button>
+
+    </form>
+      </div>
+      </div>

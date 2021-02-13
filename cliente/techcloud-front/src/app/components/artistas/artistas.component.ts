@@ -2,10 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Artistas } from 'src/app/models/artistas';
 import { ArtistasService } from 'src/app/services/artistas.service';
 
+
+
 @Component({
   selector: 'app-artistas',
   templateUrl: './artistas.component.html',
-  styleUrls: ['./artistas.component.css']
+  styleUrls: ['./artistas.component.css'],
+  providers: [ArtistasService]
+
 })
 export class ArtistasComponent implements OnInit {
 
@@ -22,5 +26,6 @@ export class ArtistasComponent implements OnInit {
       }
         )
   }
+  p: number = 1;
 
-}
+} 

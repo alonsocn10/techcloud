@@ -1,0 +1,28 @@
+<div class="cont">
+    <div class="form sign-in">
+      <h2>Nuevo Artista</h2>
+      <form name="artistForm" #artistForm="ngForm" (ngSubmit)="newArtist(artistForm)">
+      <label>
+        <span>Nombre</span>
+        <input name="nombre" type="text" #nombre="ngModel" [(ngModel)]="artistasService.selectedArtista.nombre"  required
+        minlength="4" maxlength="30"/>
+      </label>
+      <label>
+        <span>Genero</span>
+        <input name="genero" type="text" #genero="ngModel" [(ngModel)]="artistasService.selectedArtista.genero" required/>
+      </label>
+      <label>
+        <span>Descripción</span>
+        <textarea  name="descripcion" type="text" #descripcion="ngModel" [(ngModel)]="artistasService.selectedArtista.descripcion"   required>
+      </textarea>
+      </label>
+      <label>
+        <span>Imagen</span>
+        <input  name="imagen" type="text" #imagen="ngModel" [(ngModel)]="artistasService.selectedArtista.imagen"   required/>
+      </label>
+      <button type="submit" class="submit">Guardar</button>
+      <button type="button"   class="volver"> <a routerLink="/artistas"> Volver </a> </button>
+
+    </form>
+      </div>
+      </div>

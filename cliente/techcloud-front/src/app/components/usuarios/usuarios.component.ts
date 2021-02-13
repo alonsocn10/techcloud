@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { UsuariosService } from 'src/app/services/usuarios.service';
-import { Usuarios } from '../../models/usuarios'
+import { Usuarios } from '../../models/usuarios';
+
+
 
 @Component({
   selector: 'app-usuarios',
@@ -10,11 +13,12 @@ import { Usuarios } from '../../models/usuarios'
 })
 export class UsuariosComponent implements OnInit {
 
-
+  page: number=1
   constructor(public usuariosService: UsuariosService) { }
 
   ngOnInit(): void {
     this.getUsuarios();
+
   }
   getUsuarios(){
     this.usuariosService.getUsuario()
@@ -24,6 +28,5 @@ export class UsuariosComponent implements OnInit {
       }
         )
   }
-
-
+ 
 }
