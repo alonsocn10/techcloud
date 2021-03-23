@@ -18,7 +18,11 @@ export class CancionesService {
     return this.http.get(this.URL);
       
   }
+  getCancionId(_id: string) {
 
+    return this.http.get(this.URL +'/'+ _id);
+      
+  }
   postCanciones(canciones: Canciones ) {
 
     return this.http.post(this.URL, canciones);
@@ -32,7 +36,7 @@ export class CancionesService {
 
   deleteCanciones(_id: string) {
 
-    return this.http.delete(this.URL +'/${_id}');
+    return this.http.delete(this.URL +'/'+_id);
       
   };
 }

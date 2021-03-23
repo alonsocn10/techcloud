@@ -17,17 +17,17 @@ export class UsuariosService {
   }
 
     getUsuario() {
-      const token = localStorage.getItem('token')
-      const headers = new Headers()
+
       return this.http.get(this.URL);
+        
+    }
+    getUsuarioId(_id: string) {
+
+      return this.http.get(this.URL +'/'+ _id);
         
     }
 
     postUsuarios(usuarios: Usuarios ) {
-      const token = localStorage.getItem('token')
-
-      
-
       return this.http.post(this.URL, usuarios);
         
     };
@@ -39,7 +39,7 @@ export class UsuariosService {
 
     deleteUsuarios(_id: string) {
 
-      return this.http.delete(this.URL +'/${_id}');
+      return this.http.delete(this.URL +'/'+ _id);
         
     };
 

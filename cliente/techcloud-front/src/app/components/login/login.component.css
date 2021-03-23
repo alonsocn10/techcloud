@@ -22,7 +22,7 @@ input, button {
     overflow: hidden;
     position: relative;
     width: 900px;
-    height: 850px;
+    height: 1000px;
     margin: 0 auto 100px;
     background: #fff;
 }
@@ -72,11 +72,14 @@ button {
     position: absolute;
     right: 0;
     top: 0;
-    width: 1050px;
+    width: 1250px;
     height: 100%;
     background-image: url('https://cache.dpg.media/qfzysanzstct/images/64d86fa6-8073-11e9-8c50-de89c523159b/michael_bibi_b2b_andrea_oliva08_website_image_gdjp_standard.jpg?20190527123537');
     background-size: cover;
     transition: transform 1.2s ease-in-out;
+}
+.text-danger{
+    color: red;
 }
 .img:after {
     content: '';

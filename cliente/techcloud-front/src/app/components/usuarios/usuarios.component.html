@@ -1,7 +1,6 @@
 
 <div class="container">
   <div class="row"> 
-    <div class="col-s5"> 
           <table>
             <thead>
               <th>Id</th>
@@ -22,19 +21,118 @@
                 <td>{{usuario.nombreUsuario}}</td>
                 <td>{{usuario.fechaNacimiento}}</td>
                 <td>{{usuario.tipoUsuario}}</td>
-                <td><button  type="submit"><a routerLink="/edit/{{usuario._id}}" class="edit"><i class="material-icons">border_color</i></a></button>
-                  <button  type="submit"><a routerLink="/delete/{{usuario._id}}" class="delete"><i class="material-icons">backspace</i></a></button>
+                <td><button  type="submit"  (click)="getUsuariosId(usuario._id)" data-toggle="modal" data-target=".bs-example-modal-new"><i class="material-icons">border_color</i></button>
+                  <button  type="button" (click)="deleteUser(usuario._id)"  class="delete"><i class="material-icons">backspace</i></button>
                   <button type="submit"><a routerLink="/usuarios/new" class="new"><i class="material-icons">add_circle</i></a></button>
-
-                  </td>
-
-
-              </tr>
+                  <div class="modal fade bs-example-modal-new"  role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    
+                    <div class="modal-dialog">
+                      
+                      <!-- Modal Content: begins -->
+                      <div class="modal-content">
+                        
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                          <h4 class="modal-title" id="gridSystemModalLabel">Edit Usuario</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="material-icons">close</i></button>
+                            
+                        </div>
+                      
+                        <!-- Modal Body -->  
+                        <div class="modal-body">
+                          <div class="body-message">
+                            <form name="userForm" #userForm="ngForm" *ngIf ="!submitted" (ngSubmit)="editUsuario(userForm)" validate>
+                              <label>
+                                <span>Id</span>
+                                <input name="id"type="text" disabled #id="ngModel" value="{{usuariosService.usuarios._id}}"
+                                 [(ngModel)]="usuariosService.selectedUsuario.id" [class.is-invalid]="id.invalid && id.touched" required/>
+                                  
+                                 <div *ngIf="id.errors && id.touched">
+                                  <small class="text-danger" *ngIf="id.errors.touched">Este campo no se puede editar </small>
+                                </div>
+                              </label>
+                              <label>
+                              <span>Nombre *</span>
+                              <input name="nombre"type="text" #nombre="ngModel" value="{{usuariosService.usuarios.nombre}}" minlength="3" maxlength="10" pattern="[a-zA-ZñÑ]*"
+                               [(ngModel)]="usuariosService.selectedUsuario.nombre" [class.is-invalid]="nombre.invalid && nombre.touched" required/>
+                                
+                               <div *ngIf="nombre.errors && nombre.touched">
+                                <small class="text-danger" *ngIf="nombre.errors.required">Este campo es obligatorio</small>
+                                <small class="text-danger" *ngIf="nombre.errors.pattern || nombreUsuario.errors.minlength">Este campo debe tener entre 3 y 20 carácteres alfabéticos</small>
+                              </div>
+                            </label>
+                            <label>
+                              <span>Apellidos *</span>
+                              <input name="apellido"type="text"  value="{{usuariosService.usuarios.apellido}}"  #apellido="ngModel" minlength="3" maxlength="10" pattern="[a-zA-ZñÑ]*"
+                              [class.is-invalid]="apellido.invalid && apellido.touched" [(ngModel)]="usuariosService.selectedUsuario.apellido" required/> 
+                              <div *ngIf="apellido.errors && apellido.touched">
+                                <small class="text-danger" *ngIf="apellido.errors.required">Este campo es obligatorio</small>
+                                <small class="text-danger" *ngIf="apellido.errors.pattern || nombreUsuario.errors.minlength">Este campo debe tener entre 3 y 20 carácteres alfabéticos</small>
+                              </div>
+                            </label>
+                            <label>
+                              <span>Email *</span>
+                              <input type="email"  name="email"  value="{{usuariosService.usuarios.email}}" #email="ngModel" minlength="5" maxlength="25"  pattern="\S+@\S+\.\S+"
+                              [class.is-invalid]="email.invalid && email.touched" [(ngModel)]="usuariosService.selectedUsuario.email" required/> 
+                              <div *ngIf="email.errors && email.touched">
+                                <small class="text-danger" *ngIf="email.errors.required">Este campo es obligatorio</small>
+                                <small class="text-danger" *ngIf="email.errors.pattern">Este campo debe ser de tipo email</small>
+                              </div>
+                            </label>
+                            <label>
+                              <span>Nombre de Usuario *</span>    
+                              <input name="nombreUsuario"type="text"  value="{{usuariosService.usuarios.nombreUsuario}}" #nombreUsuario="ngModel" minlength="3" maxlength="20" pattern="[a-zA-ZñÑ]*"
+                                 [(ngModel)]="usuariosService.selectedUsuario.nombreUsuario" [class.is-invalid]="nombreUsuario.invalid && nombreUsuario.touched" required/> 
+                                 <div *ngIf="nombreUsuario.errors && nombreUsuario.touched">
+                                  <small class="text-danger" *ngIf="nombreUsuario.errors.required">Este campo es obligatorio</small>
+                                  <small class="text-danger" *ngIf="nombreUsuario.errors.pattern || nombreUsuario.errors.minlength">Este campo debe tener entre 3 y 20 carácteres alfabéticos</small>
+                                </div>
+                              </label>
+                            <label>
+                              <span>Fecha de Nacimiento *</span>
+                              <input name="fechaNacimiento"type="date"  value="{{usuariosService.usuarios.fechaNacimiento}}" #fechaNacimiento="ngModel" value="" minlength="5" pattern="^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$" 
+                              [class.is-invalid]="fechaNacimiento.invalid && fechaNacimiento.touched" [(ngModel)]="usuariosService.selectedUsuario.fechaNacimiento" required/>
+                              <div *ngIf="fechaNacimiento.touched  ">
+                                <small class="text-danger" *ngIf="fechaNacimiento.touched.required ">Este campo es obligatorio</small>
+                              </div>
+                            </label>
+                            <label>
+                              <span>Contraseña *</span>
+                              <input name="contrasenya"type="password"  #contrasenya="ngModel" minlength="3" maxlength="20" 
+                                 [(ngModel)]="usuariosService.selectedUsuario.contrasenya" [class.is-invalid]="contrasenya.invalid && contrasenya.touched" required/>
+                                 <div *ngIf="contrasenya.errors && contrasenya.touched">
+                                  <small class="text-danger" *ngIf="contrasenya.errors.required">Este campo es obligatorio</small>
+                                  <small class="text-danger" *ngIf="contrasenya.errors.minlength">Este campo debe tener entre 3 y 20 carácteres</small>
+                                </div>
+                            </label>
+                           <br>
+                            <button type="submit" [disabled]="userForm.invalid" class="submit" data-dismiss="modal">Guardar</button>
+                            <br>
+                            <button type="button" class="volver" routerLink="/usuarios" data-dismiss="modal"> Volver  </button>
+                          </form> 
+                          </div>
+                        </div>
+                      
+                        <!-- Modal Footer -->
+                        <div class="modal-footer">
+                          
+                          
+                        </div>
+                      
+                      
+                      </div>
+                      <!-- Modal Content: ends -->
+                      
+                    </div>
+                    
+                  </div>
+                </td>
+                   
+                 
+               </tr>
             </tbody>
-            <pagination-controls (pageChange)="page = $event"></pagination-controls>
-
         </table>
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
         
-    </div>
 </div>
 </div>

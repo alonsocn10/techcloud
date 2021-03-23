@@ -21,23 +21,21 @@ export class NewComponent implements OnInit {
   isSignUpFailed = false;
   errorMsg = '';
 
-  submitted = false;
-  newUser(userForm: NgForm){
-    this.submitted = true;
-    this.usuarioService.postUsuarios(userForm.value)
-      .subscribe( res=>{
-        console.log(res);
-        this.resetForm(userForm)
-        this.router.navigate(['/usuarios']);
+  newUser(artistForm: NgForm){
 
-      },
-      err => console.log(err))
+    this.usuarioService.postUsuarios(artistForm.value)
+    .subscribe( res=>{
+    
+    this.resetForm(artistForm)
+    this.router.navigate(['/usuarios']);
+    
+    },
+    err => console.log(err))
     }
     resetForm(form?: NgForm){
-      if(form){
-        form.reset;
-        this.usuarioService.selectedUsuario = new Usuarios();
-  
-      }
+    if(form){
+    form.reset;
+    this.usuarioService.selectedUsuario = new Usuarios();
+    }
 }
 }

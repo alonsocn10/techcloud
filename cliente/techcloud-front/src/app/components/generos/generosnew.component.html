@@ -1,0 +1,32 @@
+<div class="cont">
+    <div class="form sign-in">
+      <h2>Nuevo Genero</h2>
+      <div class="alert alert-danger" *ngIf="errorMsg">
+        {{errorMsg}}
+      </div>
+      <form name="generoForm" #generoForm="ngForm"  (ngSubmit)="newGenero(generoForm)" >
+      <label>
+        <span>Nombre</span>
+        <input name="nombre" type="text" #nombre="ngModel" pattern="^[a-zA-Z ]*$"  [class.is-invalid]="nombre.invalid && nombre.touched" 
+        [(ngModel)]="generosService.selectedGenero.nombre"  required
+        minlength="4" maxlength="30"/>
+        <div *ngIf="nombre.errors && nombre.touched">
+          <small class="text-danger" *ngIf="nombre.errors.required">Este campo es obligatorio</small>
+          <small class="text-danger" *ngIf="nombre.errors.pattern || nombre.errors.minlength || nombre.errors.maxlength">Este campo debe tener entre 4 y 30 carácteres alfabéticos</small>
+        </div>
+      </label>
+      <label>
+        <span>Tipo</span>
+        <input name="tipo" type="number" #tipo="ngModel" pattern="[0-9]"  minlength="1" maxlength="2" [class.is-invalid]="tipo.invalid && tipo.touched"
+         [(ngModel)]="generosService.selectedGenero.tipo" required/>
+         <div *ngIf="tipo.errors && tipo.touched">
+          <small class="text-danger" *ngIf="tipo.errors.required">Este campo es obligatorio</small>
+          <small class="text-danger" *ngIf="tipo.errors.pattern || tipo.errors.minlength || tipo.errors.maxlength">Este campo debe tener un numero del 0 al 9</small>
+        </div>
+      </label>
+      <button  [disabled]="generoForm.invalid" type="submit" class="submit">Guardar</button>
+      <button type="button"   class="volver"> <a routerLink="/generos/plist"> Volver </a> </button>
+
+    </form>
+      </div>
+      </div><p>generosnew works!</p>

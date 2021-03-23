@@ -21,6 +21,10 @@ import { CancionesComponent } from './components/canciones/canciones.component';
 import { NewSongComponent } from './components/canciones/new.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { UsuarioseditComponent } from './components/usuarios/usuariosedit.component';
+import { ArtistasplistComponent } from './components/artistas/artistasplist.component';
+import { GenerosplistComponent } from './components/generos/generosplist.component';
+import { CancionesplistComponent } from './components/canciones/cancionesplist.component';
+import { GenerosnewComponent } from './components/generos/generosnew.component';
 
 
 @NgModule({
@@ -38,7 +42,11 @@ import { UsuarioseditComponent } from './components/usuarios/usuariosedit.compon
     GenerosComponent,
     CancionesComponent,
     NewSongComponent,
-    UsuarioseditComponent
+    UsuarioseditComponent,
+    ArtistasplistComponent,
+    GenerosplistComponent,
+    CancionesplistComponent,
+    GenerosnewComponent
 
   ],
   imports: [

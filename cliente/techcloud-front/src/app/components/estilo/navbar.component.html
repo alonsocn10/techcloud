@@ -1,13 +1,23 @@
-<nav class="navbar">
-  <ul>
-      <li><a routerLink="" routerLinkActive>Home</a></li>
-      <li><a routerLink="/artistas"  routerLinkActive>Artistas</a></li>
-      <li><a routerLink="/generos" routerLinkActive>Géneros</a></li>
-      <li><a routerLink="/canciones" class="dropdown-trigger"  data-target="dropdown1" routerLinkActive>Canciones</a></li>
-      <li><a routerLink="/login" *ngIf="!loginService.loggedIn()" routerLinkActive>Login</a>
-        <a routerLink="/login" (click)="loginService.logOut()" *ngIf="loginService.loggedIn()" routerLinkActive>Logout</a></li>
-      <li><a routerLink="/usuarios"   *ngIf="loginService.loggedIn()" routerLinkActive>Usuarios</a></li>
 
-    </ul>
+  <nav class="navbar navbar-height-responsive" id="navbar-height-responsive">
    
-  </nav>
+   
+    <ul class="nav-list">
+      <li><a routerLink="/"  routerLinkActive>Home</a></li>
+      <li><a routerLink="/artistas"  *ngIf="!loginService.esAdmin() || loginService.esAdmin() == 2" routerLinkActive>Artistas</a>
+        <a routerLink="/artistas/plist"  *ngIf="loginService.esAdmin() == 1" routerLinkActive>Artistas</a></li>
+     <li><a routerLink="/generos"  *ngIf="!loginService.esAdmin() || loginService.esAdmin() == 2"routerLinkActive>Géneros</a>
+          <a routerLink="/generos/plist"  *ngIf="loginService.esAdmin() == 1" routerLinkActive>Géneros</a></li>
+      <li><a routerLink="/canciones" *ngIf="!loginService.esAdmin() || loginService.esAdmin() == 2"   routerLinkActive>Canciones</a>
+          <a routerLink="/canciones/plist"  *ngIf="loginService.esAdmin() == 1" routerLinkActive>Canciones</a></li>
+      <li><a routerLink="/usuarios"  *ngIf=" loginService.esAdmin() == 1" routerLinkActive>Usuarios</a>
+          </li>    
+        </ul>
+    <div class="buttons">
+      <ul class="nav-list">
+      <li><a *ngIf="loginService.loggedIn()" routerLinkActive >{{loginService.nombreUsuario.nombreUsuario}}</a></li>
+        <li *ngIf="!loginService.loggedIn()" ><a routerLink="/login" routerLinkActive>Login</a></li>
+        <li *ngIf="loginService.loggedIn()"  (click)="loginService.logOut()" ><a   routerLinkActive>Logout</a></li>
+      </ul>
+    </div>
+</nav>

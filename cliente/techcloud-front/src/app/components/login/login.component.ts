@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { get } from 'jquery';
 import { from } from 'rxjs';
 import { Login } from 'src/app/models/login';
 import { Singup } from 'src/app/models/singup';
@@ -23,18 +24,35 @@ export class LoginComponent implements OnInit  {
   ngOnInit(): void {
     this.reg()
   }
+  
+  getNombreUsuario(){
+    this.loginService.check()
+      .subscribe(res =>{
+      this.loginService.nombreUsuario.nombreUsuario = res.toString();
+        console.log(this.loginService.nombreUsuario.nombreUsuario)
+
+      }
+        )
+  }
+  nomUs = '';
   logIn(loginForm: NgForm){
     this.submitted = true;
     this.loginService.login(loginForm.value)
       .subscribe( res=>{
-        console.log(res);
+        console.log(res.token);
         localStorage.setItem('token', res.token)
+        localStorage.setItem('tipo', res.tipo)
+
+        
+        this.getNombreUsuario()
         this.resetForm(loginForm)
         this.router.navigate(['/home']);
 
       },
       err => console.log(err))
+    
     }
+  
     singUp(singUpForm: NgForm){
       this.loginService.singUp(singUpForm.value)
         .subscribe( res=>{
@@ -44,7 +62,7 @@ export class LoginComponent implements OnInit  {
           this.loginService.login(singUpForm.value.nombreUsuario + singUpForm.value.contrasenya)
 
         },
-
+        
         err => console.log(err))
       }
       

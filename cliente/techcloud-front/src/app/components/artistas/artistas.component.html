@@ -1,23 +1,18 @@
-<div class="wrapper">
-	
-  <div class="cols">
-	
-			<div class="col" ontouchstart="this.classList.toggle('hover');" *ngFor="let artista of artistasService.artistas | paginate: { itemsPerPage: 9, currentPage: page }" >
-				<div class="container">
-					<div class="front" style="background-image: url({{artista.imagen}})">
-						<div class="inner">
-							<p>{{artista.nombre}}</p>
-              <span>{{artista.genero}}</span>
-						</div>
-					</div>
-					<div class="back">
-            <a routerLink="/artistas">
-						<div class="inner">
-						  <p>{{artista.descripcion}}</p>
-            </div>
-          </a>
-					</div>
-				</div>
-			</div>
-			<pagination-controls (pageChange)="page = $event"></pagination-controls>
- </div>
+<div class="content-wrapper">
+  
+	<div class="news-card" *ngFor="let artista of artistasService.artistas | paginate: { itemsPerPage: 9, currentPage: page }">
+	  <a href="#" class="news-card__card-link"></a>
+	  <img src="{{artista.imagen}}" alt="" class="news-card__image">
+	  <div class="news-card__text-wrapper">
+		<h2 class="news-card__title">{{artista.nombre}}</h2>
+		<div class="news-card__post-name">{{artista.genero}}</div>
+		<div class="news-card__details-wrapper">
+		  <p class="news-card__excerpt">{{artista.descripcion}}</p>
+		  <a routerLink="/artistas" class="news-card__read-more">Ver Mas <i class="fas fa-long-arrow-alt-right"></i></a>
+		</div>
+	  </div>
+	</div>
+	<pagination-controls (pageChange)="page = $event"></pagination-controls>
+
+  
+  </div>

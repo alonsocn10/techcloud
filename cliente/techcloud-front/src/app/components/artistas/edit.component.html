@@ -1,26 +1,47 @@
 <div class="cont">
     <div class="form sign-in">
       <h2>Nuevo Artista</h2>
-      <form name="artistForm" #artistForm="ngForm" (ngSubmit)="newArtist(artistForm)">
+      <div class="alert alert-danger" *ngIf="errorMsg">
+        {{errorMsg}}
+      </div>
+      <form name="artistForm" #artistForm="ngForm" *ngIf ="!submitted" (ngSubmit)="newArtist(artistForm)" >
       <label>
         <span>Nombre</span>
-        <input name="nombre" type="text" #nombre="ngModel" [(ngModel)]="artistasService.selectedArtista.nombre"  required
+        <input name="nombre" type="text" #nombre="ngModel" pattern="^[a-zA-Z ]*$"  [class.is-invalid]="nombre.invalid && nombre.touched" 
+        [(ngModel)]="artistasService.selectedArtista.nombre"  required
         minlength="4" maxlength="30"/>
+        <div *ngIf="nombre.errors && nombre.touched">
+          <small class="text-danger" *ngIf="nombre.errors.required">Este campo es obligatorio</small>
+          <small class="text-danger" *ngIf="nombre.errors.pattern || nombre.errors.minlength || nombre.errors.maxlength">Este campo debe tener entre 4 y 30 carácteres alfabéticos</small>
+        </div>
       </label>
       <label>
         <span>Genero</span>
-        <input name="genero" type="text" #genero="ngModel" [(ngModel)]="artistasService.selectedArtista.genero" required/>
+        <input name="genero" type="text" #genero="ngModel" pattern="[a-zA-ZñÑ]*"  minlength="4" maxlength="20" [class.is-invalid]="genero.invalid && genero.touched"
+         [(ngModel)]="artistasService.selectedArtista.genero" required/>
+         <div *ngIf="genero.errors && genero.touched">
+          <small class="text-danger" *ngIf="genero.errors.required">Este campo es obligatorio</small>
+          <small class="text-danger" *ngIf="genero.errors.pattern || genero.errors.minlength || genero.errors.maxlength">Este campo debe tener entre 4 y 30 carácteres alfabéticos</small>
+        </div>
       </label>
       <label>
         <span>Descripción</span>
-        <textarea  name="descripcion" type="text" #descripcion="ngModel" [(ngModel)]="artistasService.selectedArtista.descripcion"   required>
+        <textarea  name="descripcion" type="text" #descripcion="ngModel" [(ngModel)]="artistasService.selectedArtista.descripcion"  minlength="4" maxlength="100" 
+         [class.is-invalid]="descripcion.invalid && descripcion.touched"  required>
       </textarea>
+      <div *ngIf="descripcion.errors && descripcion.touched">
+        <small class="text-danger" *ngIf="descripcion.errors.required">Este campo es obligatorio</small>
+        <small class="text-danger" *ngIf="descripcion.errors.minlength || descripcion.errors.maxlength">Este campo debe tener entre 4 y 30 carácteres alfabéticos</small>
+      </div>
       </label>
       <label>
         <span>Imagen</span>
-        <input  name="imagen" type="text" #imagen="ngModel" [(ngModel)]="artistasService.selectedArtista.imagen"   required/>
+        <input  name="imagen" type="text" #imagen="ngModel" [(ngModel)]="artistasService.selectedArtista.imagen"   [class.is-invalid]="imagen.invalid && imagen.touched" required/>
+        <div *ngIf="imagen.errors && imagen.touched">
+          <small class="text-danger" *ngIf="imagen.errors.required">Este campo es obligatorio</small>
+        </div>
       </label>
-      <button type="submit" class="submit">Guardar</button>
+      <button  [disabled]="artistForm.invalid" type="submit" class="submit">Guardar</button>
       <button type="button"   class="volver"> <a routerLink="/artistas"> Volver </a> </button>
 
     </form>

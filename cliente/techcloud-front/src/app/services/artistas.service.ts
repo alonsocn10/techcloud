@@ -33,6 +33,6 @@ export class ArtistasService {
 
   deleteArtistas(_id: string) {
 
-    return this.http.delete(this.URL +'/${_id}');
+    return this.http.delete(this.URL +'/'+_id);
       
   };}

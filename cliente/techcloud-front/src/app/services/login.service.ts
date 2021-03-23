@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Login } from '../models/login';
 import { Singup } from '../models/singup';
+import { Usuarios } from '../models/usuarios';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,15 @@ export class LoginService {
   
   selectedSingUp: Singup;
   selectedLogin: Login;
+  usuarios: Login[] = [];
+  nombreUsuario : Login;
+
+
   readonly URL = "http://localhost:3000/api/auth"
-  constructor(public http:HttpClient, public router: Router) { 
+  constructor(public http:HttpClient, public router: Router, ) { 
     this.selectedLogin = new Login();
     this.selectedSingUp = new Singup();
-
+    this.nombreUsuario = new Login()
   }
 
     login(inicio : Login) {
@@ -27,7 +32,6 @@ export class LoginService {
       return !!localStorage.getItem('token')
     }
     getToken(){
-      console.log('hi')
       return localStorage.getItem('token')
     }
     singUp(singUp: Singup ) {
@@ -35,9 +39,18 @@ export class LoginService {
       return this.http.post(this.URL + '/singUp' ,singUp);
         
     };
+    check() {
+
+      return this.http.get(this.URL + '/check');
+        
+    };
+    esAdmin(){
+      return localStorage.getItem('tipo')
+    }
     logOut(){
       this.router.navigate(['/login'])
       localStorage.removeItem('token')
+      localStorage.removeItem('tipo')
       console.log('Bye')
     }
 

@@ -23,7 +23,7 @@ this.artistasService.postArtistas(artistForm.value)
 .subscribe( res=>{
 
 this.resetForm(artistForm)
-this.router.navigate(['/artistas']);
+this.router.navigate(['/artistas/plist']);
 
 },
 err => console.log(err))

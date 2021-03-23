@@ -5,7 +5,7 @@
     <div class="alert alert-danger" *ngIf="errorMsg">
       {{errorMsg}}
     </div>
-    <form name="loginForm" #loginForm="ngForm" *ngIf ="!submitted" (ngSubmit)="logIn(loginForm)" validate>
+    <form name="loginForm" #loginForm="ngForm"  (ngSubmit)="logIn(loginForm)" validate>
     <label>
       <span>Nombre de Usuario</span>    
       <input name="nombreUsuario"type="text" #nombreUsuario="ngModel" minlength="3" maxlength="20" pattern="[a-zA-ZñÑ]*"
@@ -21,10 +21,10 @@
          [(ngModel)]="loginService.selectedLogin.contrasenya" [class.is-invalid]="contrasenya.invalid && contrasenya.touched" required/>
          <div *ngIf="contrasenya.errors && contrasenya.touched">
           <small class="text-danger" *ngIf="contrasenya.errors.required">Este campo es obligatorio</small>
-          <small class="text-danger" *ngIf="contrasenya.errors.minlength">Este campo debe tener entre 3 y 20 carácteres</small>
+          <small class="text-danger" *ngIf="contrasenya.errors.minlength"> Este campo debe tener entre 3 y 20 carácteres</small>
         </div>
     </label>
-    <button [disabled]="loginForm.invalid" type="submit" class="submit">Log In</button>
+    <button [disabled]="loginForm.invalid"type="submit" class="submit">Log In</button>
    
   </form>
   </div>
@@ -50,56 +50,56 @@
       </div>
       <form name="singUpForm" #singUpForm="ngForm" *ngIf ="!submitted" (ngSubmit)="singUp(singUpForm)" validate>
         <label>
-        <span>Nombre</span>
+        <span>Nombre *</span>
         <input name="nombre"type="text" #nombre="ngModel" minlength="3" maxlength="10" pattern="[a-zA-ZñÑ]*"
          [(ngModel)]="loginService.selectedSingUp.nombre" [class.is-invalid]="nombre.invalid && nombre.touched" required/>
          <div *ngIf="nombre.errors && nombre.touched">
           <small class="text-danger" *ngIf="nombre.errors.required">Este campo es obligatorio</small>
-          <small class="text-danger" *ngIf="nombre.errors.pattern || nombreUsuario.errors.minlength">Este campo debe tener entre 3 y 20 carácteres alfabéticos</small>
+          <small class="text-danger" *ngIf="nombre.errors.pattern || nombreUsuario.errors.minlength"> Este campo debe tener entre 3 y 20 carácteres alfabéticos</small>
         </div>
       </label>
       <label>
-        <span>Apellidos</span>
+        <span>Apellidos *</span>
         <input name="apellido"type="text" #apellido="ngModel" minlength="3" maxlength="10" pattern="[a-zA-ZñÑ]*"
         [class.is-invalid]="apellido.invalid && apellido.touched" [(ngModel)]="loginService.selectedSingUp.apellido" required/>
         <div *ngIf="apellido.errors && apellido.touched">
           <small class="text-danger" *ngIf="apellido.errors.required">Este campo es obligatorio</small>
-          <small class="text-danger" *ngIf="apellido.errors.pattern || nombreUsuario.errors.minlength">Este campo debe tener entre 3 y 20 carácteres alfabéticos</small>
+          <small class="text-danger" *ngIf="apellido.errors.pattern || nombreUsuario.errors.minlength"> Este campo debe tener entre 3 y 20 carácteres alfabéticos</small>
         </div>
       </label>
       <label>
-        <span>Email</span>
+        <span>Email *</span>
         <input type="email"  name="email" #email="ngModel" minlength="5" maxlength="25"  pattern="\S+@\S+\.\S+"
         [class.is-invalid]="email.invalid && email.touched" [(ngModel)]="loginService.selectedSingUp.email" required/>
         <div *ngIf="email.errors && email.touched">
           <small class="text-danger" *ngIf="email.errors.required">Este campo es obligatorio</small>
-          <small class="text-danger" *ngIf="email.errors.pattern">Este campo debe ser de tipo email</small>
+          <small class="text-danger" *ngIf="email.errors.pattern"> Este campo debe ser de tipo email</small>
         </div>
       </label>
       <label>
-        <span>Nombre de Usuario</span>    
+        <span>Nombre de Usuario *</span>    
         <input name="nombreUsuario"type="text" #nombreUsuario="ngModel" minlength="3" maxlength="20" pattern="[a-zA-ZñÑ]*"
            [(ngModel)]="loginService.selectedSingUp.nombreUsuario" [class.is-invalid]="nombreUsuario.invalid && nombreUsuario.touched" required/>
            <div *ngIf="nombreUsuario.errors && nombreUsuario.touched">
             <small class="text-danger" *ngIf="nombreUsuario.errors.required">Este campo es obligatorio</small>
-            <small class="text-danger" *ngIf="nombreUsuario.errors.pattern || nombreUsuario.errors.minlength">Este campo debe tener entre 3 y 20 carácteres alfabéticos</small>
+            <small class="text-danger" *ngIf="nombreUsuario.errors.pattern || nombreUsuario.errors.minlength"> Este campo debe tener entre 3 y 20 carácteres alfabéticos</small>
           </div>
         </label>
       <label>
-        <span>Fecha de Nacimiento</span>
-        <input name="fechaNacimiento"type="date" #fechaNacimiento="ngModel" value="" minlength="5" pattern="^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$" 
+        <span>Fecha de Nacimiento *</span>
+        <input name="fechaNacimiento"type="date" #fechaNacimiento="ngModel" value="" minlength="5" 
         [class.is-invalid]="fechaNacimiento.invalid && fechaNacimiento.touched" [(ngModel)]="loginService.selectedSingUp.fechaNacimiento" required/>
         <div *ngIf="fechaNacimiento.touched || fechaNacimiento.errors ">
-          <small class="text-danger" *ngIf="fechaNacimiento.touched.required || fechaNacimiento.errors.minlength">Este campo es obligatorio</small>
+          <small class="text-danger" *ngIf="fechaNacimiento.touched.required ">Este campo es obligatorio</small>
         </div>
       </label>
       <label>
-        <span>Contraseña</span>
+        <span>Contraseña *</span>
         <input name="contrasenya"type="password" #contrasenya="ngModel" minlength="3" maxlength="20" 
            [(ngModel)]="loginService.selectedSingUp.contrasenya" [class.is-invalid]="contrasenya.invalid && contrasenya.touched" required/>
            <div *ngIf="contrasenya.errors && contrasenya.touched">
             <small class="text-danger" *ngIf="contrasenya.errors.required">Este campo es obligatorio</small>
-            <small class="text-danger" *ngIf="contrasenya.errors.minlength">Este campo debe tener entre 3 y 20 carácteres</small>
+            <small class="text-danger" *ngIf="contrasenya.errors.minlength"> Este campo debe tener entre 3 y 20 carácteres</small>
           </div>
       </label>
       <button type="submit" class="submit">Sign Up</button>

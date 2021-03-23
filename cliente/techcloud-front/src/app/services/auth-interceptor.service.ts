@@ -19,6 +19,7 @@ export class AuthInterceptorService implements HttpInterceptor{
   ) { }
 
   intercept(req: { clone: (arg0: { setHeaders: { Authorization: string; }; }) => any; }, next: { handle: (arg0: any) => any; }) {
+         
     const tokenizeReq = req.clone({
       setHeaders: {
         Authorization: `${this.loginService.getToken()}`
@@ -31,9 +32,9 @@ export class AuthInterceptorService implements HttpInterceptor{
         catchError((err: HttpErrorResponse) => {
   
           if (err.status === 403 || err.status === 401) {
-            this.router.navigateByUrl('/login');
+                   
+            this.router.navigateByUrl('/home');
           }
-  
           return throwError( err );
   
         })

@@ -1,0 +1,141 @@
+
+<div class="container">
+    <div class="row"> 
+            <table>
+              <thead>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Acciones</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let genero of generosService.generos | paginate: { itemsPerPage: 10, currentPage: page }" >
+                  <td>{{genero._id}}</td>
+                  <td>{{genero.nombre}}</td>
+                  <td>{{genero.tipo}}</td>
+                  <td><button  type="submit" (click)="getGenerosId(genero._id)" data-toggle="modal" data-target=".bs-example-modal-new"><i class="material-icons">border_color</i></button>
+                    <button  type="button" (click)="deleteGenero(genero._id)"  class="delete"><i class="material-icons">backspace</i></button>
+                    <button type="submit"><a routerLink="/generos/new" class="new"><i class="material-icons">add_circle</i></a></button>
+                    <div class="modal fade bs-example-modal-new"  role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    
+                      <div class="modal-dialog">
+                        
+                        <!-- Modal Content: begins -->
+                        <div class="modal-content">
+                          
+                          <!-- Modal Header -->
+                          <div class="modal-header">
+                            <h4 class="modal-title" id="gridSystemModalLabel">Edit Usuario</h4>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="material-icons">close</i></button>
+                              
+                          </div>
+                        
+                          <!-- Modal Body -->  
+                          <div class="modal-body">
+                            <div class="body-message">
+                              <form name="userForm" #userForm="ngForm" *ngIf ="!submitted" (ngSubmit)="editUsuario(userForm)" validate>
+                                <label>
+                                  <span>Id</span>
+                                  <input name="id"type="text" disabled #id="ngModel" value="{{generosService.generos._id}}"
+                                   [(ngModel)]="generosService.selectedGenero.id" [class.is-invalid]="id.invalid && id.touched" required/>
+                                    
+                                   <div *ngIf="id.errors && id.touched">
+                                    <small class="text-danger" *ngIf="id.errors.touched">Este campo no se puede editar </small>
+                                  </div>
+                                </label>
+                                <label>
+                                <span>Nombre *</span>
+                                <input name="nombre"type="text" #nombre="ngModel" value="{{generosService.generos.nombre}}" minlength="3" maxlength="10" pattern="[a-zA-ZñÑ]*"
+                                 [(ngModel)]="generosService.selectedGenero.nombre" [class.is-invalid]="nombre.invalid && nombre.touched" required/>
+                                  
+                                 <div *ngIf="nombre.errors && nombre.touched">
+                                  <small class="text-danger" *ngIf="nombre.errors.required">Este campo es obligatorio</small>
+                                  <small class="text-danger" *ngIf="nombre.errors.pattern || nombreUsuario.errors.minlength">Este campo debe tener entre 3 y 20 carácteres alfabéticos</small>
+                                </div>
+                              </label>
+                              <label>
+                                <span>Tipo *</span>
+                                <input name="tipo" type="number" #tipo="ngModel" alue="{{generosService.generos.nombre}}" pattern="[0-9]"  minlength="1" maxlength="2" [class.is-invalid]="tipo.invalid && tipo.touched"
+                                [(ngModel)]="generosService.selectedGenero.tipo" required/>
+                                <div *ngIf="tipo.errors && tipo.touched">
+                                <small class="text-danger" *ngIf="tipo.errors.required">Este campo es obligatorio</small>
+                                <small class="text-danger" *ngIf="tipo.errors.pattern || tipo.errors.minlength || tipo.errors.maxlength">Este campo debe tener un numero del 0 al 9</small>
+                                </div>
+                              </label>
+                             
+                             <br>
+                              <button type="submit" [disabled]="userForm.invalid" class="submit" data-dismiss="modal">Guardar</button>
+                              <br>
+                              <button type="button" class="volver" routerLink="/generos" data-dismiss="modal"> Volver  </button>
+                            </form> 
+                            </div>
+                          </div>
+                        
+                          <!-- Modal Footer -->
+                          <div class="modal-footer">
+                            
+                            
+                          </div>
+                        
+                        
+                        </div>
+                        <!-- Modal Content: ends -->
+                        
+                      </div>
+                      
+                    </div>
+                    <div class="modal fade bs-example-modal-delete"  role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    
+                      <div class="modal-dialog">
+                        
+                        <!-- Modal Content: begins -->
+                        <div class="modal-content">
+                          
+                          <!-- Modal Header -->
+                          <div class="modal-header">
+                            <h4 class="modal-title" id="gridSystemModalLabel">Delete Usuario</h4>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="material-icons">close</i></button>
+                              
+                          </div>
+                        
+                          <!-- Modal Body -->  
+                          <div class="modal-body">
+                            <div class="body-message">
+                              <h4>Estas seguro que quieres eliminar esta cancion?</h4> <br>
+                              Id: {{generosService.generos._id}}  <br>
+                              Nombre: {{generosService.generos.nombre}}<br>
+                              <br>
+                              <button type="submit"(click)="deleteGenero(generosService.generos._id)" class="submit" data-dismiss="modal">Eliminar</button>
+                              <br>
+                              <button type="button" class="volver" routerLink="/generos" data-dismiss="modal"> Volver  </button>
+                            </div>
+                          </div>
+                        
+                          <!-- Modal Footer -->
+                          <div class="modal-footer">
+                            
+                            
+                          </div>
+                        
+                        
+                        </div>
+                        <!-- Modal Content: ends -->
+                        
+                      </div>
+                      
+                    </div>
+                    </td>
+                   
+  
+                </tr>
+                
+              </tbody>  
+              
+          </table>
+          
+          <pagination-controls (pageChange)="page = $event"></pagination-controls>
+
+          
+  </div>
+  </div>
+  
