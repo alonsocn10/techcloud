@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Artistas } from 'src/app/models/artistas';
+import { Generos } from 'src/app/models/generos';
 import { ArtistasService } from 'src/app/services/artistas.service';
+import { GenerosService } from 'src/app/services/generos.service';
 
 @Component({
   selector: 'app-edit',
@@ -13,10 +15,11 @@ import { ArtistasService } from 'src/app/services/artistas.service';
 })
 export class EditComponent implements OnInit {
 
-  constructor(public artistasService: ArtistasService,
+  constructor(public artistasService: ArtistasService,public generoService: GenerosService,
     public router: Router) { }
 
 ngOnInit(): void {
+  this.getGeneros()
 }
 newArtist(artistForm: NgForm){
 this.artistasService.postArtistas(artistForm.value)
@@ -28,6 +31,12 @@ this.router.navigate(['/artistas/plist']);
 },
 err => console.log(err))
 }
+getGeneros(){
+  this.generoService.getGenero()
+      .subscribe(res =>{
+        this.generoService.generos = res as Generos[];
+      }
+        )}
 resetForm(form?: NgForm){
 if(form){
 form.reset;
