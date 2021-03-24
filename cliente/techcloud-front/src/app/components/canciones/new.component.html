@@ -26,8 +26,10 @@
       </label>
       <label>
         <span>Artista *</span>
-        <input  name="Artista" type="text" #Artista="ngModel" [(ngModel)]="cancionesService.selectedCancion.Artista"  pattern="^[a-zA-Z ]*$"  [class.is-invalid]="Artista.invalid && Artista.touched" 
-          required>
+          <select name="Artista" id="artista"  [(ngModel)]="cancionesService.selectedCancion.Artista"  #Artista="ngModel" [class.is-invalid]="Artista.invalid && Artista.touched" required>
+            <option *ngFor="let artista of artistasService.artistas" value="{{artista.nombre}}">{{artista.nombre}}, {{artista.genero}}</option>
+            
+          </select>
           <div *ngIf="Artista.errors && Artista.touched">
             <small class="text-danger" *ngIf="Artista.errors.required">Este campo es obligatorio</small>
             <small class="text-danger" *ngIf="Artista.errors.pattern || Artista.errors.minlength || Artista.errors.maxlength">Este campo debe tener un numero entre 0 y 9</small>
