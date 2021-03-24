@@ -8,7 +8,7 @@ body {
     background: #ededed;
     text-align: center;
 }
-input, button, textarea {
+input, button, textarea, select, option {
     border: none;
     outline: none;
     background: none;
@@ -70,7 +70,7 @@ label span {
     color: #cfcfcf;
     text-transform: uppercase;
 }
-input,textarea {
+input,textarea, select, option {
     display: block;
     width: 100%;
     margin-top: 5px;
