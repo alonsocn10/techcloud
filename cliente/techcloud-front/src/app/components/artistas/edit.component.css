@@ -8,7 +8,7 @@ body {
     background: #ededed;
     text-align: center;
 }
-input, button, textarea {
+input, button, textarea, select, option {
     border: none;
     outline: none;
     background: none;
