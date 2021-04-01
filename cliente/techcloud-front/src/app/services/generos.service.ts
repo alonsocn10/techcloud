@@ -27,9 +27,9 @@ export class GenerosService {
     return this.http.get(this.URL +'/'+ _id);
       
   }
-  putGeneros(generos: Generos) {
+  putGeneros(generos: Generos, _id: string) {
 
-    return this.http.put(this.URL + '/${generos._id}', generos);
+    return this.http.put(this.URL + '/' + _id, generos);
       
   };
 

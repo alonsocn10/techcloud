@@ -28,9 +28,9 @@ export class CancionesService {
     return this.http.post(this.URL, canciones);
       
   };
-  putCanciones(canciones: Canciones) {
+  putCanciones(canciones: Canciones, _id: string) {
 
-    return this.http.put(this.URL + '/${canciones._id}', canciones);
+    return this.http.put(this.URL + '/' + _id, canciones);
       
   };
 

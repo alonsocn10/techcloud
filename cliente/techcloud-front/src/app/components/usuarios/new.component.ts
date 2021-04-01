@@ -13,7 +13,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class NewComponent implements OnInit {
 
-  constructor(public usuarioService : UsuariosService, public router: Router ){ }
+  constructor(public usuarioService : UsuariosService, public router: Router,  ){ }
 
   ngOnInit(): void {
   }

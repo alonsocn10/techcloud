@@ -1,157 +1,158 @@
-
 <div class="container">
-    <div class="row"> 
-      
-            <table>
-              <thead>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Artista</th>
-                <th>Genero</th>
-                <th>Acciones</th>
-              </thead>
-              <tbody>
-                <tr *ngFor="let cancion of cancionesService.canciones | paginate: { itemsPerPage: 10, currentPage: page }" >
-                  <td>{{cancion._id}}</td>
-                  <td>{{cancion.nombre}}</td>
-                  <td>{{cancion.Artista}}</td>
-                  <td>{{cancion.Genero}}</td>
-                  <td><button  type="submit" (click)="getCancionId(cancion._id)" data-toggle="modal" data-target=".bs-example-modal-new" class="edit"><i class="material-icons">border_color</i></button>
-                    <button  type="button" (click)="getCancionId(cancion._id)"  data-toggle="modal" data-target=".bs-example-modal-delete" class="delete"><i class="material-icons">backspace</i></button>
-                    <button type="submit"><a routerLink="/canciones/new" class="new"><i class="material-icons">add_circle</i></a></button>
-                    <div class="modal fade bs-example-modal-new"  role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                    
-                      <div class="modal-dialog">
+  <div class="row"> 
+    
+          <table>
+            <thead>
+              <th>Id</th>
+              <th>Nombre</th>
+              <th>Artista</th>
+              <th>Genero</th>
+              <th>Acciones</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cancion of cancionesService.canciones | paginate: { itemsPerPage: 10, currentPage: page }" >
+                <td>{{cancion._id}}</td>
+                <td>{{cancion.nombre}}</td>
+                <td>{{cancion.Artista}}</td>
+                <td>{{cancion.Genero}}</td>
+                <td><button  type="submit" (click)="getCancionId(cancion._id)" data-toggle="modal" data-target=".bs-example-modal-new" class="edit"><i class="material-icons">border_color</i></button>
+                  <button  type="button" (click)="getCancionId(cancion._id)"  data-toggle="modal" data-target=".bs-example-modal-delete" class="delete"><i class="material-icons">backspace</i></button>
+                  <button type="submit"><a routerLink="/canciones/new" class="new"><i class="material-icons">add_circle</i></a></button>
+                  <div class="modal fade bs-example-modal-new"  role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                  
+                    <div class="modal-dialog">
+                      
+                      <!-- Modal Content: begins -->
+                      <div class="modal-content">
                         
-                        <!-- Modal Content: begins -->
-                        <div class="modal-content">
-                          
-                          <!-- Modal Header -->
-                          <div class="modal-header">
-                            <h4 class="modal-title" id="gridSystemModalLabel">Edit Cancion</h4>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="material-icons">close</i></button>
-                              
-                          </div>
-                        
-                          <!-- Modal Body -->  
-                          <div class="modal-body">
-                            <div class="body-message">
-                              <form name="userForm" #userForm="ngForm" *ngIf ="!submitted" (ngSubmit)="editUsuario(userForm)" validate>
-                                <label>
-                                  <span>Id</span>
-                                  <input name="id"type="text" disabled #id="ngModel" value="{{cancionesService.canciones._id}}"
-                                   [(ngModel)]="cancionesService.selectedCancion.id" [class.is-invalid]="id.invalid && id.touched" required/>
-                                    
-                                   <div *ngIf="id.errors && id.touched">
-                                    <small class="text-danger" *ngIf="id.errors.touched">Este campo no se puede editar </small>
-                                  </div>
-                                </label>
-                                <label>
-                                <span>Nombre *</span>
-                                <input name="nombre"type="text" #nombre="ngModel" value="{{cancionesService.canciones.nombre}}" minlength="3" maxlength="10" pattern="[a-zA-ZñÑ]*"
-                                 [(ngModel)]="cancionesService.selectedCancion.nombre" [class.is-invalid]="nombre.invalid && nombre.touched" required/>
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                          <h4 class="modal-title" id="gridSystemModalLabel">Edit Cancion</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="material-icons">close</i></button>
+                            
+                        </div>
+                      
+                        <!-- Modal Body -->  
+                        <div class="modal-body">
+                          <div class="body-message">
+                            <form name="cancionesForm" #cancionesForm="ngForm" *ngIf ="!submitted" (ngSubmit)="editCancion(cancionesForm, cancionesService.canciones._id)" validate>
+                              <label>
+                                <span>Id</span>
+                                <input name="id"type="text" disabled #id="ngModel" value="{{cancionesService.canciones._id}}"
+                                 [(ngModel)]="cancionesService.selectedCancion.id" [class.is-invalid]="id.invalid && id.touched" required/>
                                   
-                                 <div *ngIf="nombre.errors && nombre.touched">
-                                  <small class="text-danger" *ngIf="nombre.errors.required">Este campo es obligatorio</small>
-                                  <small class="text-danger" *ngIf="nombre.errors.pattern || nombreUsuario.errors.minlength">Este campo debe tener entre 3 y 20 carácteres alfabéticos</small>
+                                 <div *ngIf="id.errors && id.touched">
+                                  <small class="text-danger" *ngIf="id.errors.touched">Este campo no se puede editar </small>
                                 </div>
                               </label>
                               <label>
-                                <span>Genero *</span>
-                                <input name="Genero" type="number" #Genero="ngModel"  value="{{cancionesService.canciones.Genero}}" [(ngModel)]="cancionesService.selectedCancion.Genero" pattern="^[0-9 ]*$" [class.is-invalid]="Genero.invalid && Genero.touched"
-                                 required/>
-                                 <div *ngIf="Genero.errors && Genero.touched">
-                                  <small class="text-danger" *ngIf="Genero.errors.required">Este campo es obligatorio</small>
-                                  <small class="text-danger" *ngIf="Genero.errors.pattern || Genero.errors.minlength || Genero.errors.maxlength">Este campo debe tener un numero entre 0 y 9</small>
+                              <span>Nombre *</span>
+                              <input name="nombre"type="text" #nombre="ngModel" value="{{cancionesService.canciones.nombre}}" minlength="3" maxlength="20" pattern="[a-zA-ZñÑ]*"
+                               [(ngModel)]="cancionesService.selectedCancion.nombre" [class.is-invalid]="nombre.invalid && nombre.touched" required/>
+                                
+                               <div *ngIf="nombre.errors && nombre.touched">
+                                <small class="text-danger" *ngIf="nombre.errors.required">Este campo es obligatorio</small>
+                                <small class="text-danger" *ngIf="nombre.errors.pattern || nombreUsuario.errors.minlength">Este campo debe tener entre 3 y 20 carácteres alfabéticos</small>
+                              </div>
+                            </label>
+                            <label>
+                              <span>Genero *</span>
+                              <select name="Genero" value="{{cancionesService.canciones.Genero}}" class="form-select"  id="Genero"  [(ngModel)]="cancionesService.selectedCancion.Genero"  #Genero="ngModel" [class.is-invalid]="Genero.invalid && Genero.touched" required>
+                                <option  class="dropdown-item "*ngFor="let genero of generosService.generos"  value="{{genero.tipo}}">Nombre: {{genero.nombre}} | Tipo: {{genero.tipo}}</option>
+                                
+                              </select>
+                               <div *ngIf="Genero.errors && Genero.touched">
+                                <small class="text-danger" *ngIf="Genero.errors.required">Este campo es obligatorio</small>
+                                <small class="text-danger" *ngIf="Genero.errors.pattern || Genero.errors.minlength || Genero.errors.maxlength">Este campo debe tener un numero entre 0 y 9</small>
+                              </div>
+                            </label>
+                            <label>
+                              <span>Artista *</span>
+                                <select  name="Artista" class="form-select" #Artista="ngModel"  value="{{cancionesService.canciones.Artista}}" [(ngModel)]="cancionesService.selectedCancion.Artista" [class.is-invalid]="Artista.invalid && Artista.touched"  required>
+                                  <option *ngFor="let artista of artistasService.artistas" value="{{artista.nombre}}">Nombre: {{artista.nombre}} | Genero: {{artista.genero}}</option>
+                                </select>
+                                <div *ngIf="Artista.errors && Artista.touched">
+                                  <small class="text-danger" *ngIf="Artista.errors.required">Este campo es obligatorio</small>
+                                  <small class="text-danger" *ngIf="Artista.errors.pattern || Artista.errors.minlength || Artista.errors.maxlength">Este campo debe tener un numero entre 0 y 9</small>
                                 </div>
-                              </label>
-                              <label>
-                                <span>Artista *</span>
-                                <input  name="Artista" type="text" #Artista="ngModel"  value="{{cancionesService.canciones.Artista}}" [(ngModel)]="cancionesService.selectedCancion.Artista"  pattern="^[a-zA-Z ]*$"  [class.is-invalid]="Artista.invalid && Artista.touched" 
-                                  required>
-                                  <div *ngIf="Artista.errors && Artista.touched">
-                                    <small class="text-danger" *ngIf="Artista.errors.required">Este campo es obligatorio</small>
-                                    <small class="text-danger" *ngIf="Artista.errors.pattern || Artista.errors.minlength || Artista.errors.maxlength">Este campo debe tener un numero entre 0 y 9</small>
-                                  </div>
-                              </label>
-                              <label>
-                                <span>Imagen *</span>
-                                <input  name="imagen" type="text" #imagen="ngModel"  value="{{cancionesService.canciones.imagen}}" [(ngModel)]="cancionesService.selectedCancion.imagen"  [class.is-invalid]="imagen.invalid && imagen.touched" required/>
-                                <div *ngIf="imagen.errors && imagen.touched">
-                                  <small class="text-danger" *ngIf="imagen.errors.required">Este campo es obligatorio</small>
-                                </div>
-                              </label>
-                            
-                             <br>
-                              <button type="submit" [disabled]="userForm.invalid" class="submit" data-dismiss="modal">Guardar</button>
-                              <br>
-                              <button type="button" class="volver" routerLink="/canciones" data-dismiss="modal"> Volver  </button>
-                            </form> 
-                            </div>
-                          </div>
-                        
-                          <!-- Modal Footer -->
-                          <div class="modal-footer">
-                            
-                            
-                          </div>
-                        
-                        
-                        </div>
-                        <!-- Modal Content: ends -->
-                        
-                      </div>
-                      
-                    </div>
-                    <div class="modal fade bs-example-modal-delete"  role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                    
-                      <div class="modal-dialog">
-                        
-                        <!-- Modal Content: begins -->
-                        <div class="modal-content">
+                            </label>
+                            <label>
+                              <span>Imagen *</span>
+                              <input  name="imagen" type="text" #imagen="ngModel"  value="{{cancionesService.canciones.imagen}}" [(ngModel)]="cancionesService.selectedCancion.imagen"  [class.is-invalid]="imagen.invalid && imagen.touched" required/>
+                              <div *ngIf="imagen.errors && imagen.touched">
+                                <small class="text-danger" *ngIf="imagen.errors.required">Este campo es obligatorio</small>
+                              </div>
+                            </label>
                           
-                          <!-- Modal Header -->
-                          <div class="modal-header">
-                            <h4 class="modal-title" id="gridSystemModalLabel">Delete Usuario</h4>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="material-icons">close</i></button>
-                              
+                           <br>
+                            <button type="submit" [disabled]="cancionesForm.invalid" class="submit" (click)="editCancion(cancionesForm, cancionesService.canciones._id)"data-dismiss="modal">Guardar</button>
+                            <br>
+                            <button type="button" class="volver" routerLink="/canciones" data-dismiss="modal"> Volver  </button>
+                          </form> 
                           </div>
-                        
-                          <!-- Modal Body -->  
-                          <div class="modal-body">
-                            <div class="body-message">
-                              <h4>Estas seguro que quieres eliminar esta cancion?</h4> <br>
-                              Id: {{cancionesService.canciones._id}}  <br>
-                              Nombre: {{cancionesService.canciones.nombre}}<br>
-                              <br>
-                              <button type="submit"(click)="deleteCancion(cancionesService.canciones._id)" class="submit" data-dismiss="modal">Eliminar</button>
-                              <br>
-                              <button type="button" class="volver" routerLink="/canciones" data-dismiss="modal"> Volver  </button>
-                            </div>
-                          </div>
-                        
-                          <!-- Modal Footer -->
-                          <div class="modal-footer">
-                            
-                            
-                          </div>
-                        
-                        
                         </div>
-                        <!-- Modal Content: ends -->
-                        
+                      
+                        <!-- Modal Footer -->
+                        <div class="modal-footer">
+                          
+                          
+                        </div>
+                      
+                      
                       </div>
+                      <!-- Modal Content: ends -->
                       
                     </div>
-                    </td>
-  
-  
-                </tr>
-              </tbody>  
-          </table>
-          <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                    
+                  </div>
+                  <div class="modal fade bs-example-modal-delete"  role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                  
+                    <div class="modal-dialog">
+                      
+                      <!-- Modal Content: begins -->
+                      <div class="modal-content">
+                        
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                          <h4 class="modal-title" id="gridSystemModalLabel">Delete Cancion</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="material-icons">close</i></button>
+                            
+                        </div>
+                      
+                        <!-- Modal Body -->  
+                        <div class="modal-body">
+                          <div class="body-message">
+                            <h4>Estas seguro que quieres eliminar esta cancion?</h4> <br>
+                            Id: {{cancionesService.canciones._id}}  <br>
+                            Nombre: {{cancionesService.canciones.nombre}}<br>
+                            <br>
+                            <button type="submit"(click)="deleteCancion(cancionesService.canciones._id)" class="submit" data-dismiss="modal">Eliminar</button>
+                            <br>
+                            <button type="button" class="volver" routerLink="/canciones" data-dismiss="modal"> Volver  </button>
+                          </div>
+                        </div>
+                      
+                        <!-- Modal Footer -->
+                        <div class="modal-footer">
+                          
+                          
+                        </div>
+                      
+                      
+                      </div>
+                      <!-- Modal Content: ends -->
+                      
+                    </div>
+                    
+                  </div>
+                  </td>
 
-          
-  </div>
-  </div>
-  
+
+              </tr>
+            </tbody>  
+        </table>
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+
+        
+</div>
+</div>

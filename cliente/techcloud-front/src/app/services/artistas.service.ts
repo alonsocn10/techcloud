@@ -19,15 +19,19 @@ export class ArtistasService {
     return this.http.get(this.URL);
       
   }
+  getArtistaId(_id: string) {
 
+    return this.http.get(this.URL +'/'+ _id);
+      
+  }
   postArtistas(artistas: Artistas ) {
 
     return this.http.post(this.URL, artistas);
       
   };
-  putArtistas(artistas: Artistas) {
+  putArtistas(artistas: Artistas, _id: string) {
 
-    return this.http.put(this.URL + '/${artistas._id}', artistas);
+    return this.http.put(this.URL + '/' + _id, artistas);
       
   };
 

@@ -14,10 +14,137 @@
                   <td>{{artista._id}}</td>
                   <td>{{artista.nombre}}</td>
                   <td>{{artista.genero}}</td>
-                  <td><button  type="submit" (click)="editArtist(usuario)"><a routerLink="edit/" class="edit"><i class="material-icons">border_color</i></a></button>
-                    <button  type="button" (click)="deleteArtist(artista._id)"  class="delete"><i class="material-icons">backspace</i></button>
+                  <td><button  type="submit" (click)="getArtistaid(artista._id)" data-toggle="modal" data-target=".bs-example-modal-new" class="edit"><i class="material-icons">border_color</i></button>
+                    <button  type="button" (click)="getArtistaid(artista._id)" data-toggle="modal" data-target=".bs-example-modal-delete" class="delete"><i class="material-icons">backspace</i></button>
                     <button type="submit"><a routerLink="/artistas/new" class="new"><i class="material-icons">add_circle</i></a></button>
-  
+                    <div class="modal fade bs-example-modal-new"  role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                  
+                      <div class="modal-dialog">
+                        
+                        <!-- Modal Content: begins -->
+                        <div class="modal-content">
+                          
+                          <!-- Modal Header -->
+                          <div class="modal-header">
+                            <h4 class="modal-title" id="gridSystemModalLabel">Edit Artista</h4>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="material-icons">close</i></button>
+                              
+                          </div>
+                        
+                          <!-- Modal Body -->  
+                          <div class="modal-body">
+                            <div class="body-message">
+                              <form name="artistForm" #artistForm="ngForm" *ngIf ="!submitted" (ngSubmit)="editArtist(artistForm, artistasService.artistas._id)" >
+                                <label>
+                                  <span>Id</span>
+                                  <input disabled name="_id" type="text" #_id="ngModel" value="{{artistasService.artistas._id}}"  [class.is-invalid]="_id.invalid && _id.touched" 
+                                  [(ngModel)]="artistasService.selectedArtista._id"  required/>
+                                  <div *ngIf="nombre.errors && nombre.touched ">
+                                    <small class="text-danger" *ngIf="nombre.errors.required">Este campo es obligatorio</small>
+                                    <small class="text-danger" *ngIf="nombre.errors.touched ">Este campo no se puede editar</small>
+                                  </div>
+                                </label>
+                                <label>
+                                  <span>Nombre</span>
+                                  <input name="nombre" type="text" #nombre="ngModel" value="{{artistasService.artistas.nombre}}" pattern="^[a-zA-Z ]*$"  [class.is-invalid]="nombre.invalid && nombre.touched" 
+                                  [(ngModel)]="artistasService.selectedArtista.nombre"  required
+                                  minlength="4" maxlength="30"/>
+                                  <div *ngIf="nombre.errors && nombre.touched ">
+                                    <small class="text-danger" *ngIf="nombre.errors.required">Este campo es obligatorio</small>
+                                    <small class="text-danger" *ngIf="nombre.errors.pattern || nombre.errors.minlength || nombre.errors.maxlength">Este campo debe tener entre 4 y 30 carácteres alfabéticos</small>
+                                  </div>
+                                </label>
+                                <label>
+                                  <span>Genero</span>
+                                    <select name="genero" value="{{artistasService.artistas.genero}}" class="form-select"  id="genero"  [(ngModel)]="artistasService.selectedArtista.genero"  #genero="ngModel" [class.is-invalid]="genero.invalid && genero.touched" required>
+                                      <option  class="dropdown-item "*ngFor="let genero of generoService.generos" value="{{genero.nombre}}">Nombre: {{genero.nombre}}, tipo: {{genero.tipo}}</option>
+                                      
+                                    </select>
+                                    <div *ngIf="genero.errors && genero.touched">
+                                      <small class="text-danger" *ngIf="genero.errors.required">Este campo es obligatorio</small>
+                                      <small class="text-danger" *ngIf="genero.errors.pattern || genero.errors.minlength || genero.errors.maxlength">Este campo debe tener un numero entre 0 y 9</small>
+                                    </div>
+                                   
+                                </label>
+                                <label>
+                                  <span>Descripción</span>
+                                  <textarea enabled name="descripcion" value="{{artistasService.artistas.descripcion}}" type="text" #descripcion="ngModel" [(ngModel)]="artistasService.selectedArtista.descripcion"  minlength="4" maxlength="150" 
+                                   [class.is-invalid]="descripcion.invalid && descripcion.touched"  required>
+                                </textarea>
+                                <div *ngIf="descripcion.errors && descripcion.touched">
+                                  <small class="text-danger" *ngIf="descripcion.errors.required">Este campo es obligatorio</small>
+                                  <small class="text-danger" *ngIf="descripcion.errors.minlength || descripcion.errors.maxlength">Este campo debe tener entre 4 y 30 carácteres alfabéticos</small>
+                                </div>
+                                </label>
+                                <label>
+                                  <span>Imagen</span>
+                                  <input  name="imagen" value="{{artistasService.artistas.imagen}}" type="text" #imagen="ngModel" [(ngModel)]="artistasService.selectedArtista.imagen"   [class.is-invalid]="imagen.invalid && imagen.touched" required/>
+                                  <div *ngIf="imagen.errors && imagen.touched">
+                                    <small class="text-danger" *ngIf="imagen.errors.required">Este campo es obligatorio</small>
+                                  </div>
+                                </label>
+                                <br>
+                                <button  [disabled]="artistForm.invalid" type="submit" (click)="editArtist(artistForm, artistasService.artistas._id)" class="submit" data-dismiss="modal">Guardar</button>
+                                <br>
+                                <button type="button" data-dismiss="modal"  class="volver"> Volver </button>
+                          
+                              </form>
+                            </div>
+                          </div>
+                        
+                          <!-- Modal Footer -->
+                          <div class="modal-footer">
+                            
+                            
+                          </div>
+                        
+                        
+                        </div>
+                        <!-- Modal Content: ends -->
+                        
+                      </div>
+                      
+                    </div>
+                    <div class="modal fade bs-example-modal-delete"  role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                  
+                      <div class="modal-dialog">
+                        
+                        <!-- Modal Content: begins -->
+                        <div class="modal-content">
+                          
+                          <!-- Modal Header -->
+                          <div class="modal-header">
+                            <h4 class="modal-title" id="gridSystemModalLabel">Delete Artista</h4>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="material-icons">close</i></button>
+                              
+                          </div>
+                        
+                          <!-- Modal Body -->  
+                          <div class="modal-body">
+                            <div class="body-message">
+                              <h4>Estas seguro que quieres eliminar esta artista?</h4> <br>
+                              Id: {{artistasService.artistas._id}}  <br>
+                              Nombre: {{artistasService.artistas.nombre}}<br>
+                              <br>
+                              <button type="submit"(click)="deleteArtist(artistasService.artistas._id)" class="submit" data-dismiss="modal">Eliminar</button>
+                              <br>
+                              <button type="button" class="volver"  data-dismiss="modal"> Volver  </button>
+                            </div>
+                          </div>
+                        
+                          <!-- Modal Footer -->
+                          <div class="modal-footer">
+                            
+                            
+                          </div>
+                        
+                        
+                        </div>
+                        <!-- Modal Content: ends -->
+                        
+                      </div>
+                      
+                    </div>
                     </td>
   
   
@@ -31,4 +158,3 @@
  
   </div>
   </div>
-  

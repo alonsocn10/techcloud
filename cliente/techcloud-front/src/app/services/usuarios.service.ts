@@ -31,9 +31,9 @@ export class UsuariosService {
       return this.http.post(this.URL, usuarios);
         
     };
-    putUsuarios(usuarios: Usuarios) {
+    putUsuarios(usuarios: Usuarios, _id: string) {
 
-      return this.http.put(this.URL + '/${usuarios._id}', usuarios);
+      return this.http.put(this.URL + '/' + _id, usuarios);
         
     };
 

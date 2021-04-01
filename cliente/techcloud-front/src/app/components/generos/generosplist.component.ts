@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Generos } from 'src/app/models/generos';
 import { GenerosService } from 'src/app/services/generos.service';
 
@@ -18,7 +19,6 @@ export class GenerosplistComponent implements OnInit {
     this.generosService.getGenero()
       .subscribe(res =>{
         this.generosService.generos = res as Generos[];
-        console.log(res)
       }
         )
   }
@@ -29,17 +29,31 @@ export class GenerosplistComponent implements OnInit {
       }
         )
   }
-  editGenero(artistas: Generos){
-    this.generosService.selectedGenero = artistas
+  resetForm(form?: NgForm){
+    if(form){
+    form.reset;
+    this.generosService.selectedGenero = new Generos();
+    }
+}
+  editGenero(generoForm: NgForm, _id: string){
+    this.generosService.putGeneros(generoForm.value, _id)
+    .subscribe( res => {
+                  console.log('Updated Succesfully')
+                  this.getGeneros()
+                  this.resetForm(generoForm)
+    }, err =>{
+      console.log(err)
+    }
+    )
   }
   deleteGenero(_id: string){
-    if(confirm('Estas seguro de eliminar el genero?')){
+    
       this.generosService.deleteGeneros(_id)
     .subscribe(res =>{
       this.getGeneros()
      console.log(res)
     })
       
-    }
+    
 }
 }

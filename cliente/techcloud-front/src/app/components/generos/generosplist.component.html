@@ -13,8 +13,8 @@
                   <td>{{genero._id}}</td>
                   <td>{{genero.nombre}}</td>
                   <td>{{genero.tipo}}</td>
-                  <td><button  type="submit" (click)="getGenerosId(genero._id)" data-toggle="modal" data-target=".bs-example-modal-new"><i class="material-icons">border_color</i></button>
-                    <button  type="button" (click)="deleteGenero(genero._id)"  class="delete"><i class="material-icons">backspace</i></button>
+                  <td><button  type="submit" (click)="getGenerosId(genero._id)" class="edit" data-toggle="modal" data-target=".bs-example-modal-new"><i class="material-icons">border_color</i></button>
+                    <button  type="button" (click)="getGenerosId(genero._id)"  class="delete" data-toggle="modal" data-target=".bs-example-modal-delete"><i class="material-icons">backspace</i></button>
                     <button type="submit"><a routerLink="/generos/new" class="new"><i class="material-icons">add_circle</i></a></button>
                     <div class="modal fade bs-example-modal-new"  role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                     
@@ -33,7 +33,7 @@
                           <!-- Modal Body -->  
                           <div class="modal-body">
                             <div class="body-message">
-                              <form name="userForm" #userForm="ngForm" *ngIf ="!submitted" (ngSubmit)="editUsuario(userForm)" validate>
+                              <form name="userForm" #userForm="ngForm" *ngIf ="!submitted" (ngSubmit)="editGenero(userForm, generosService.generos._id)" validate>
                                 <label>
                                   <span>Id</span>
                                   <input name="id"type="text" disabled #id="ngModel" value="{{generosService.generos._id}}"
@@ -45,7 +45,7 @@
                                 </label>
                                 <label>
                                 <span>Nombre *</span>
-                                <input name="nombre"type="text" #nombre="ngModel" value="{{generosService.generos.nombre}}" minlength="3" maxlength="10" pattern="[a-zA-ZñÑ]*"
+                                <input name="nombre"type="text" #nombre="ngModel" value="{{generosService.generos.nombre}}" minlength="3" maxlength="20" pattern="[a-zA-ZñÑ ]*"
                                  [(ngModel)]="generosService.selectedGenero.nombre" [class.is-invalid]="nombre.invalid && nombre.touched" required/>
                                   
                                  <div *ngIf="nombre.errors && nombre.touched">
@@ -64,7 +64,7 @@
                               </label>
                              
                              <br>
-                              <button type="submit" [disabled]="userForm.invalid" class="submit" data-dismiss="modal">Guardar</button>
+                              <button type="submit" [disabled]="userForm.invalid" (click)="editGenero(userForm, generosService.generos._id)" class="submit" data-dismiss="modal">Guardar</button>
                               <br>
                               <button type="button" class="volver" routerLink="/generos" data-dismiss="modal"> Volver  </button>
                             </form> 
@@ -93,7 +93,7 @@
                           
                           <!-- Modal Header -->
                           <div class="modal-header">
-                            <h4 class="modal-title" id="gridSystemModalLabel">Delete Usuario</h4>
+                            <h4 class="modal-title" id="gridSystemModalLabel">Delete Genero</h4>
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="material-icons">close</i></button>
                               
                           </div>
@@ -101,13 +101,13 @@
                           <!-- Modal Body -->  
                           <div class="modal-body">
                             <div class="body-message">
-                              <h4>Estas seguro que quieres eliminar esta cancion?</h4> <br>
+                              <h4>Estas seguro que quieres eliminar este genero?</h4> <br>
                               Id: {{generosService.generos._id}}  <br>
                               Nombre: {{generosService.generos.nombre}}<br>
                               <br>
                               <button type="submit"(click)="deleteGenero(generosService.generos._id)" class="submit" data-dismiss="modal">Eliminar</button>
                               <br>
-                              <button type="button" class="volver" routerLink="/generos" data-dismiss="modal"> Volver  </button>
+                              <button type="button" class="volver" data-dismiss="modal"> Volver  </button>
                             </div>
                           </div>
                         

@@ -21,8 +21,8 @@
                 <td>{{usuario.nombreUsuario}}</td>
                 <td>{{usuario.fechaNacimiento}}</td>
                 <td>{{usuario.tipoUsuario}}</td>
-                <td><button  type="submit"  (click)="getUsuariosId(usuario._id)" data-toggle="modal" data-target=".bs-example-modal-new"><i class="material-icons">border_color</i></button>
-                  <button  type="button" (click)="deleteUser(usuario._id)"  class="delete"><i class="material-icons">backspace</i></button>
+                <td><button  type="submit"  (click)="getUsuariosId(usuario._id)" class="edit" data-toggle="modal" data-target=".bs-example-modal-new"><i class="material-icons">border_color</i></button>
+                  <button  type="button" (click)="getUsuariosId(usuario._id)" data-toggle="modal" data-target=".bs-example-modal-delete" class="delete"><i class="material-icons">backspace</i></button>
                   <button type="submit"><a routerLink="/usuarios/new" class="new"><i class="material-icons">add_circle</i></a></button>
                   <div class="modal fade bs-example-modal-new"  role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                     
@@ -41,7 +41,7 @@
                         <!-- Modal Body -->  
                         <div class="modal-body">
                           <div class="body-message">
-                            <form name="userForm" #userForm="ngForm" *ngIf ="!submitted" (ngSubmit)="editUsuario(userForm)" validate>
+                            <form name="userForm" #userForm="ngForm" *ngIf ="!submitted" (ngSubmit)="editUsuario(userForm, usuariosService.usuarios._id)" validate>
                               <label>
                                 <span>Id</span>
                                 <input name="id"type="text" disabled #id="ngModel" value="{{usuariosService.usuarios._id}}"
@@ -106,10 +106,50 @@
                                 </div>
                             </label>
                            <br>
-                            <button type="submit" [disabled]="userForm.invalid" class="submit" data-dismiss="modal">Guardar</button>
+                            <button type="submit" [disabled]="userForm.invalid" class="submit" (click)="editUsuario(userForm, usuariosService.usuarios._id)" data-dismiss="modal">Guardar</button>
                             <br>
                             <button type="button" class="volver" routerLink="/usuarios" data-dismiss="modal"> Volver  </button>
                           </form> 
+                          </div>
+                        </div>
+                      
+                        <!-- Modal Footer -->
+                        <div class="modal-footer">
+                          
+                          
+                        </div>
+                      
+                      
+                      </div>
+                      <!-- Modal Content: ends -->
+                      
+                    </div>
+                    
+                  </div>
+                  <div class="modal fade bs-example-modal-delete"  role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                  
+                    <div class="modal-dialog">
+                      
+                      <!-- Modal Content: begins -->
+                      <div class="modal-content">
+                        
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                          <h4 class="modal-title" id="gridSystemModalLabel">Delete Usuario</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="material-icons">close</i></button>
+                            
+                        </div>
+                      
+                        <!-- Modal Body -->  
+                        <div class="modal-body">
+                          <div class="body-message">
+                            <h4>Estas seguro que quieres eliminar este usuario?</h4> <br>
+                            Id: {{usuariosService.usuarios._id}}  <br>
+                            Nombre: {{usuariosService.usuarios.nombre}}<br>
+                            <br>
+                            <button type="submit"(click)="deleteUser(usuariosService.usuarios._id)" class="submit" data-dismiss="modal">Eliminar</button>
+                            <br>
+                            <button type="button" class="volver" routerLink="/canciones" data-dismiss="modal"> Volver  </button>
                           </div>
                         </div>
                       

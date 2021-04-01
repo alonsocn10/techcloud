@@ -25,7 +25,6 @@ export class UsuariosComponent implements OnInit {
     this.usuariosService.getUsuario()
       .subscribe(res =>{
         this.usuariosService.usuarios = res as Usuarios[];
-        console.log(res)
       }
         )
   }
@@ -36,8 +35,8 @@ export class UsuariosComponent implements OnInit {
       }
         )
   }
-  editUsuario(usuarioForm: NgForm){
-    this.usuariosService.putUsuarios(usuarioForm.value)
+  editUsuario(usuarioForm: NgForm, _id: string){
+    this.usuariosService.putUsuarios(usuarioForm.value, _id)
     .subscribe( res=>{
     
       this.resetForm(usuarioForm)
@@ -48,15 +47,27 @@ export class UsuariosComponent implements OnInit {
       err => console.log(err))
     
   }
+  editArtist(userForm: NgForm, _id: string){
+    this.usuariosService.putUsuarios(userForm.value, _id)
+      .subscribe(res =>{
+          console.log('Updated Succesfully')
+          this.resetForm(userForm)
+          this.getUsuarios();
+
+      }, err =>{
+        console.log(err)
+      } 
+      )
+  }
   deleteUser(_id: string){
-    if(confirm('Estas seguro de eliminar el usuario?')){
+   
       this.usuariosService.deleteUsuarios(_id)
     .subscribe(res =>{
       this.getUsuarios()
      console.log(res)
     })
       
-    }
+    
     
   }
   resetForm(form?: NgForm){
