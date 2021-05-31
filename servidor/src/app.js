@@ -1,4 +1,4 @@
-const bodyParser = require ('body-parser');
+const bodyParser = require('body-parser')
 const morgan = require ('morgan');
 const express = require('express');
 const mongoose = require('mongoose');
@@ -10,6 +10,10 @@ const genderRoutes = require('./routes/genero');
 const artistRoutes = require('./routes/artista');
 const authRoutes = require('./routes/auth');
 const cors = require ('cors');
+const upload = require('./libs/multer');
+const path = require('path');
+
+
 
 
 
@@ -30,9 +34,13 @@ app.set('port',process.env.PORT || 3000);
 //verifyToken
 
 //Midleware
-app.use(bodyParser.json());
-app.use(morgan('dev'));
-app.use(cors({origin: 'http://localhost:4200'}));
+// Analizar cuerpo
+app.use(express.json());
+app.use(express.urlencoded({
+    extended: true
+}));app.use(morgan('dev'));
+app.use(cors({origin: 'http://localhost:4200'})); 
+app.use(express.static('public'));
 
 
 //routes
@@ -42,6 +50,7 @@ app.use('/api/canciones', songsRoutes);
 app.use('/api/generos', genderRoutes);
 app.use('/api/artistas', artistRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/uploads', express.static(path.resolve('uploads')));
 
 
 

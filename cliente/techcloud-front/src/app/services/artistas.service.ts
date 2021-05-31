@@ -24,14 +24,25 @@ export class ArtistasService {
     return this.http.get(this.URL +'/'+ _id);
       
   }
-  postArtistas(artistas: Artistas ) {
+  postArtistas(nombre: string , genero: string , descripcion:string, imagen: File ) {
+    const fd = new FormData();
+    fd.append('nombre', nombre);
+    fd.append('genero', genero);
+    fd.append('descripcion', descripcion);
+    fd.append('imagen', imagen);
 
-    return this.http.post(this.URL, artistas);
+    return this.http.post(this.URL, fd);
       
   };
-  putArtistas(artistas: Artistas, _id: string) {
+  putArtistas( _id: string, nombre: string , genero: string , descripcion:string, imagen: File ) {
+    console.log("hola")
+    const fd = new FormData();
+    fd.append('nombre', nombre);
+    fd.append('genero', genero);
+    fd.append('descripcion', descripcion);
+    fd.append('imagen', imagen);
 
-    return this.http.put(this.URL + '/' + _id, artistas);
+    return this.http.put(this.URL + '/' + _id, fd);
       
   };
 

@@ -26,12 +26,11 @@ export class CancionesplistComponent implements OnInit {
     this.cancionesService.getCanciones()
       .subscribe(res =>{
         this.cancionesService.canciones = res as Canciones[];
-        console.log(res)
       }
         )
   }
-  editCancion(cancionFomr: NgForm, _id: string){
-    this.cancionesService.putCanciones(cancionFomr.value, _id)
+  editCancion(cancionForm: NgForm, _id: string){
+    this.cancionesService.putCanciones(cancionForm.value, _id)
       .subscribe( res => {
         this.cancionesService.canciones = res as Canciones[]
         this.getCanciones()
@@ -67,7 +66,6 @@ export class CancionesplistComponent implements OnInit {
       this.cancionesService.deleteCanciones(_id)
     .subscribe(res =>{
       this.getCanciones()
-     console.log(res)
     })
     
   }

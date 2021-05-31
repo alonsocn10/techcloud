@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoggedUser } from 'src/app/models/loggedUser';
 import { Login } from 'src/app/models/login';
 import { LoginService } from 'src/app/services/login.service';
 import { AuthInterceptorService } from '../../services/auth-interceptor.service';
@@ -15,7 +16,7 @@ export class EstiloComponent implements OnInit {
 
         
   }
-  
+
   ngOnInit(): void {
   }
   

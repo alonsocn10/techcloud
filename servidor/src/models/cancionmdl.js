@@ -10,20 +10,18 @@ const CancionSchema = new Schema({
 
     },
     nomUsuario: {
-        type: String,
-        ref :'nombreUsuario'
+        type: Schema.Types.ObjectId,
+        ref :'_id'
 
     },
     Genero: {
         type: Number,
         ref :'tipo'
     },
-    imagen: Object,
+    imagen: String,
     Descripcion: String,
-    length  :  Number , 
-    chunkSize :  Number  , 
-    uploadDate: Date  , 
-    filename:   String  
+    cancion  :  String , 
+     
     
 });
 

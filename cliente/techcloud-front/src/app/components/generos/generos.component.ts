@@ -18,7 +18,6 @@ export class GenerosComponent implements OnInit {
     this.generosService.getGenero()
       .subscribe(res =>{
         this.generosService.generos = res as Generos[];
-        console.log(res)
       }
         )
   }

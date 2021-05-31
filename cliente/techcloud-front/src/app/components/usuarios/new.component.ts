@@ -23,7 +23,7 @@ export class NewComponent implements OnInit {
 
   newUser(artistForm: NgForm){
 
-    this.usuarioService.postUsuarios(artistForm.value)
+    this.usuarioService.postUsuarios(artistForm.value, )
     .subscribe( res=>{
     
     this.resetForm(artistForm)

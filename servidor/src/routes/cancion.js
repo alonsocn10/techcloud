@@ -1,5 +1,5 @@
 const router = require('express-promise-router')();
-
+const upload = require('../libs/multer')
 const {
     index,
     newCancion,
@@ -9,9 +9,9 @@ const {
 } = require('../controllers/cancionctr');
 
 router.get('/', index);
-router.post('/', newCancion);
+router.post('/', upload.single('imagen'),newCancion);
 router.get('/:cancionId', getCancion);
-router.put('/:cancionId', replaceCancion);
+router.put('/:cancionId', upload.single('imagen','cancion'),replaceCancion);
 router.delete('/:cancionId', deleteCancion)
 
 

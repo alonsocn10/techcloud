@@ -41,7 +41,7 @@
                         <!-- Modal Body -->  
                         <div class="modal-body">
                           <div class="body-message">
-                            <form name="userForm" #userForm="ngForm" *ngIf ="!submitted" (ngSubmit)="editUsuario(userForm, usuariosService.usuarios._id)" validate>
+                            <form name="userForm" #userForm="ngForm" *ngIf ="!submitted" (ngSubmit)="editUsuario(nombre,apellido,email,fechaNacimiento,nombreUsuario,contrasenya,userForm, usuariosService.usuarios._id)" validate>
                               <label>
                                 <span>Id</span>
                                 <input name="id"type="text" disabled #id="ngModel" value="{{usuariosService.usuarios._id}}"
@@ -96,6 +96,15 @@
                                 <small class="text-danger" *ngIf="fechaNacimiento.touched.required ">Este campo es obligatorio</small>
                               </div>
                             </label>
+                            <label>
+                              <span>Imagen *</span>
+                              <span><img [src]="imgSelected || 'http://localhost:3000/' + usuariosService.usuarios.imagen" class="img-fluid" alt="No image" (click)="imagenElegida.click()"></span>
+                              <input name="imagen"type="file"  class="d-none" (change)="imagenElegida($event)" #imagen="ngModel" value="" minlength="5" 
+                              [class.is-invalid]="imagen.invalid && imagen.touched" [(ngModel)]="usuariosService.selectedUsuario.imagen" required>
+                              <div *ngIf="imagen.touched || imagen.errors ">
+                                <small class="text-danger" *ngIf="imagen.touched.required ">Este campo es obligatorio</small>
+                              </div>
+                              </label>
                             <label>
                               <span>Contraseña *</span>
                               <input name="contrasenya"type="password"  #contrasenya="ngModel" minlength="3" maxlength="20" 

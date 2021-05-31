@@ -27,7 +27,6 @@ export class UsuarioseditComponent implements OnInit {
     this.usuarioService.
       .subscribe(res =>{
         this.usuarioService.usuarios = res as Usuarios[];
-        console.log(res)
       }
         )
   }*/

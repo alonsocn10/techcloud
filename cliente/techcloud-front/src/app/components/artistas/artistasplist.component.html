@@ -14,7 +14,7 @@
                   <td>{{artista._id}}</td>
                   <td>{{artista.nombre}}</td>
                   <td>{{artista.genero}}</td>
-                  <td><button  type="submit" (click)="getArtistaid(artista._id)" data-toggle="modal" data-target=".bs-example-modal-new" class="edit"><i class="material-icons">border_color</i></button>
+                  <td><button  type="submit" (click)="getArtistaid(artista._id)" data-toggle="modal" data-target=".bs-example-modal-new" class="edit"><i class="material-icons">mode_edit</i></button>
                     <button  type="button" (click)="getArtistaid(artista._id)" data-toggle="modal" data-target=".bs-example-modal-delete" class="delete"><i class="material-icons">backspace</i></button>
                     <button type="submit"><a routerLink="/artistas/new" class="new"><i class="material-icons">add_circle</i></a></button>
                     <div class="modal fade bs-example-modal-new"  role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -34,7 +34,7 @@
                           <!-- Modal Body -->  
                           <div class="modal-body">
                             <div class="body-message">
-                              <form name="artistForm" #artistForm="ngForm" *ngIf ="!submitted" (ngSubmit)="editArtist(artistForm, artistasService.artistas._id)" >
+                              <form name="artistForm" #artistForm="ngForm" *ngIf ="!submitted" (ngSubmit)="editArtist(nombre,genero,descripcion, artistasService.artistas._id)" >
                                 <label>
                                   <span>Id</span>
                                   <input disabled name="_id" type="text" #_id="ngModel" value="{{artistasService.artistas._id}}"  [class.is-invalid]="_id.invalid && _id.touched" 
@@ -77,12 +77,14 @@
                                 </div>
                                 </label>
                                 <label>
-                                  <span>Imagen</span>
-                                  <input  name="imagen" value="{{artistasService.artistas.imagen}}" type="text" #imagen="ngModel" [(ngModel)]="artistasService.selectedArtista.imagen"   [class.is-invalid]="imagen.invalid && imagen.touched" required/>
-                                  <div *ngIf="imagen.errors && imagen.touched">
-                                    <small class="text-danger" *ngIf="imagen.errors.required">Este campo es obligatorio</small>
+                                  <span>Imagen *</span>
+                                  <span><img [src]="imgSelected || 'http://localhost:3000/' + artistasService.artistas.imagen" class="img-fluid" alt="No image" (click)="imagenElegida.click()"></span>
+                                  <input name="imagen"type="file"  class="d-none" (change)="imagenElegida($event)" #imagen="ngModel" value="" minlength="5" 
+                                  [class.is-invalid]="imagen.invalid && imagen.touched" [(ngModel)]="artistasService.selectedArtista.imagen" required>
+                                  <div *ngIf="imagen.touched || imagen.errors ">
+                                    <small class="text-danger" *ngIf="imagen.touched.required ">Este campo es obligatorio</small>
                                   </div>
-                                </label>
+                                  </label>
                                 <br>
                                 <button  [disabled]="artistForm.invalid" type="submit" (click)="editArtist(artistForm, artistasService.artistas._id)" class="submit" data-dismiss="modal">Guardar</button>
                                 <br>

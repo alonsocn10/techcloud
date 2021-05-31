@@ -38,7 +38,6 @@ export class GenerosplistComponent implements OnInit {
   editGenero(generoForm: NgForm, _id: string){
     this.generosService.putGeneros(generoForm.value, _id)
     .subscribe( res => {
-                  console.log('Updated Succesfully')
                   this.getGeneros()
                   this.resetForm(generoForm)
     }, err =>{
@@ -51,7 +50,6 @@ export class GenerosplistComponent implements OnInit {
       this.generosService.deleteGeneros(_id)
     .subscribe(res =>{
       this.getGeneros()
-     console.log(res)
     })
       
     
