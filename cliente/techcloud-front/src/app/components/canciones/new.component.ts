@@ -7,6 +7,10 @@ import { Generos } from 'src/app/models/generos';
 import { ArtistasService } from 'src/app/services/artistas.service';
 import { CancionesService } from 'src/app/services/canciones.service';
 import { GenerosService } from 'src/app/services/generos.service';
+import { LoginService } from 'src/app/services/login.service';
+interface HtmlInputEvent extends Event {
+  target: HTMLInputElement & EventTarget;
+}
 
 @Component({
   selector: 'app-new',
@@ -15,12 +19,24 @@ import { GenerosService } from 'src/app/services/generos.service';
   providers: [CancionesService]
 })
 export class NewSongComponent implements OnInit {
-
+  imagen: File;
+  imgSelected!: string | ArrayBuffer;
   constructor(public cancionesService: CancionesService,
     public router: Router,
     public generosService: GenerosService,
-    public artistasService: ArtistasService) { }
-
+    public artistasService: ArtistasService,
+    public authService: LoginService ) { 
+    }
+    
+    imagenElegida(event: HtmlInputEvent): void {
+      if (event.target.files && event.target.files[0]) {
+        this.imagen = <File>event.target.files[0];
+        // image preview
+        const reader = new FileReader();
+        reader.onload = e => this.imgSelected = reader.result;
+        reader.readAsDataURL(this.imagen);
+      }
+    }
 ngOnInit(): void {
   this.getSelect()
 }
@@ -39,8 +55,9 @@ getSelect(){
     }  )
 }
 
-newSong(cancionForm: NgForm){
-this.cancionesService.postCanciones(cancionForm.value)
+newSong(nombre: HTMLInputElement,Genero: HTMLInputElement,Artista: HTMLInputElement, cancionForm: NgForm){
+   let id = this.authService.get_id()
+  this.cancionesService.postCanciones(nombre.value, Genero.value, Artista.value, id, this.imagen)
 .subscribe( res=>{
 
 this.resetForm(cancionForm)

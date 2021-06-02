@@ -2,7 +2,7 @@
 <div class="content-wrapper">
   
 	<div class="news-card" *ngFor="let genero of generosService.generos | paginate: { itemsPerPage: 9, currentPage: page }">
-	  <a href="#" class="news-card__card-link"></a>
+	  <a routerLink="/generos/songs/" (click)="getCanciones(generosService.generos.tipo)" class="news-card__card-link"></a>
 	  <img src="https://thump-images.vice.com/images/2015/07/27/untitled-article-1438008899-body-image-1438009313.jpg?amp;output-quality=75" alt="" class="news-card__image">
 	  <div class="news-card__text-wrapper">
 		<h2 class="news-card__title">{{genero.nombre}}</h2>

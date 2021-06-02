@@ -59,10 +59,15 @@ export class LoginService {
     esAdmin(){
       return localStorage.getItem('tipo')
     }
+    get_id(){
+      console.log(localStorage.getItem('_id'))
+      return localStorage.getItem('_id')
+    }
     logOut(){
       this.router.navigate(['/login'])
       localStorage.removeItem('token')
       localStorage.removeItem('tipo')
+      localStorage.removeItem('_id')
       console.log('Bye')
     }
 

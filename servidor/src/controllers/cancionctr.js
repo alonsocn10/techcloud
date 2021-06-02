@@ -15,7 +15,6 @@ module.exports = {
         console.log(req.body);
         const newcancion = new cancion(req.body);
         newcancion.imagen = req.file.path;
-        newcancion.cancion = req.file.path;
         const cancions = await newcancion.save();
         res.status(200).json(cancions);
 
@@ -26,15 +25,26 @@ module.exports = {
         res.status(200).json(cancions);
 
     },
+    getGenero: async (req, res, ) => {
+        const { genero } = req.params;
+        const cancions = await cancion.find({Genero : genero});
+        res.status(200).json(cancions);
+
+    },
     replaceCancion: async (req, res, ) => {
         console.log(req.body);
         const { cancionId } = req.params;
         const newcancion = req.body;
+
+        if (newcancion.audio){
+            await fs.unlink(path.resolve(newUsuario.cancion))
+            newcancion.audio = req.files.path;
+        }
         if (newcancion.imagen){
             await fs.unlink(path.resolve(newUsuario.imagen))
+            newcancion.imagen = req.imagen.path;
         }
-        newcancion.imagen = req.file.path;
-        newcancion.cancion = req.file.path;
+        newcancion.audio = req.files.path;
         const oldcancion = await cancion.findByIdAndUpdate(cancionId, newcancion);
         res.status(200).json({success : true});
 

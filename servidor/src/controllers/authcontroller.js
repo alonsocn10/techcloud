@@ -38,7 +38,8 @@ module.exports = {
         return res.status(400).json({ token: null, message: 'Contraseña incorrecta' });
         const token=jwt.sign({id: userFound._id },'config.SECRET', {expiresIn : 86400})   
         const tipo = await userFound.tipoUsuario
-         res.json({ token,tipo });
+        const _id = await userFound._id
+         res.json({ token,tipo, _id });
 
 }
 ,
@@ -53,7 +54,8 @@ module.exports = {
         return res.status(400).json({ token: null, message: 'Contraseña incorrecta' });
         const token=jwt.sign({id: userFound._id },'config.SECRET', {expiresIn : 86400})   
         const tipo = await userFound.tipoUsuario
-         res.json({ token,tipo });
+        const nombreUsuario = await userFound.nombreUsuario
+         res.json({ token,tipo, nombreUsuario });
          
 
 },
@@ -66,7 +68,7 @@ module.exports = {
         const decoded = jwt.verify(token, 'config.SECRET')
         req.usuarioid = decoded.id  
         const usuario = await usuariomdl.findById(req.usuarioid)
-        res.status(200).json(usuario.nombreUsuario, usuario.tipoUsuario, usuario.email)
+        res.status(200).json(usuario);
 
     }
 }

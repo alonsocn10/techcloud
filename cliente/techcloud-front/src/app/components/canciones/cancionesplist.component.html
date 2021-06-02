@@ -7,6 +7,7 @@
               <th>Nombre</th>
               <th>Artista</th>
               <th>Genero</th>
+              <th>Usuario</th>
               <th>Acciones</th>
             </thead>
             <tbody>
@@ -15,6 +16,7 @@
                 <td>{{cancion.nombre}}</td>
                 <td>{{cancion.Artista}}</td>
                 <td>{{cancion.Genero}}</td>
+                <td>{{cancion.usuario}}</td>
                 <td><button  type="submit" (click)="getCancionId(cancion._id)" data-toggle="modal" data-target=".bs-example-modal-new" class="edit"><i class="material-icons">border_color</i></button>
                   <button  type="button" (click)="getCancionId(cancion._id)"  data-toggle="modal" data-target=".bs-example-modal-delete" class="delete"><i class="material-icons">backspace</i></button>
                   <button type="submit"><a routerLink="/canciones/new" class="new"><i class="material-icons">add_circle</i></a></button>

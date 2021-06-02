@@ -2,12 +2,18 @@
 	<div class="songs-wrapper" >
 		<div class="row">
 			<div class="col s12 m6 l4 x3" *ngFor="let cancion of cancionesService.canciones">
-				<div class="active song">
+				<div class="active song" >
 					<div class="song-image" style="background-image:url({{cancion.imagen}})"></div>
-					<div class="song-info">
-						<div class="song-title">{{cancion.nombre}}</div>
+					<div class="song-info" >
+						<div class="song-title" >{{cancion.nombre}}</div>
 						<div class="song-artist">by {{cancion.Artista}}</div>
 						<div class="song-time">{{cancion.Genero}}</div>
+						<div class="song-time">{{cancion.usuario}}</div>
+						<div class="song-time">
+							<audio controls >
+								<source [src]="'http://localhost:3000/' + cancion.audio" type="audio/mpeg">
+							  Your browser does not support the audio element.
+							  </audio></div>
 					</div>
 				</div>
 			</div>

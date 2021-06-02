@@ -25,6 +25,7 @@ import { ArtistasplistComponent } from './components/artistas/artistasplist.comp
 import { GenerosplistComponent } from './components/generos/generosplist.component';
 import { CancionesplistComponent } from './components/canciones/cancionesplist.component';
 import { GenerosnewComponent } from './components/generos/generosnew.component';
+import { GenerosCancionesComponent } from './components/generos/generos-canciones.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { GenerosnewComponent } from './components/generos/generosnew.component';
     ArtistasplistComponent,
     GenerosplistComponent,
     CancionesplistComponent,
-    GenerosnewComponent
+    GenerosnewComponent,
+    GenerosCancionesComponent
 
   ],
   imports: [

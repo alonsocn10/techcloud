@@ -53,12 +53,15 @@ export class LoginComponent implements OnInit  {
       .subscribe( res=>{
         localStorage.setItem('token', res.token)
         localStorage.setItem('tipo', res.tipo)
+        localStorage.setItem('_id', res.nombreUsuario)
         this.getNombreUsuario()
         this.resetForm(loginForm)
         this.router.navigate(['/home']);
 
       },
-      err => console.log(err))
+      err => {
+      this.errorMsg = "Se ha producido un error al realizar su petición. Por favor compruebe los datos y pruebe otra vez" }
+      )
     
     }
   

@@ -2,9 +2,7 @@
 <div class="cont">
   <div class="form sign-in">
     <h2>Bienvenido</h2>
-    <div class="alert alert-danger" *ngIf="errorMsg">
-      {{errorMsg}}
-    </div>
+    
     <form name="loginForm" #loginForm="ngForm"  (ngSubmit)="logIn(loginForm)" validate>
     <label>
       <span>Nombre de Usuario</span>    
@@ -24,6 +22,9 @@
           <small class="text-danger" *ngIf="contrasenya.errors.minlength"> Este campo debe tener entre 3 y 20 carácteres</small>
         </div>
     </label>
+    <div class="alert alert-danger" *ngIf="errorMsg">
+      {{errorMsg}}
+    </div>
     <button [disabled]="loginForm.invalid"type="submit" class="submit">Log In</button>
    
   </form>

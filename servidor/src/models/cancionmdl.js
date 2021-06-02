@@ -9,18 +9,14 @@ const CancionSchema = new Schema({
         ref: 'artistas'
 
     },
-    nomUsuario: {
-        type: Schema.Types.ObjectId,
-        ref :'_id'
-
-    },
+    usuario: String,
     Genero: {
         type: Number,
         ref :'tipo'
     },
     imagen: String,
     Descripcion: String,
-    cancion  :  String , 
+    audio  :  String , 
      
     
 });

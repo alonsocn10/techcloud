@@ -22,7 +22,9 @@ export class EditComponent implements OnInit {
 
   constructor(public artistasService: ArtistasService,
     public router: Router,
-    public generosService: GenerosService) { }
+    public generosService: GenerosService,imagen: File, imgSelected: string | ArrayBuffer ) { 
+      this.imagen = imagen
+      this.imgSelected = imgSelected }
   
     imagenElegida(event: HtmlInputEvent): void {
       if (event.target.files && event.target.files[0]) {

@@ -1,10 +1,11 @@
 export class Canciones {
-    constructor(_id= '', nombre= '', Genero='', Artista='', imagen='' ){
+    constructor(_id= '', nombre= '', Genero='', Artista='', imagen='', usuario='' ){
         this._id= _id ;
         this.nombre= nombre ;
         this.Genero= Genero ;
         this.Artista=Artista  ;
         this.imagen= imagen ;
+        this.usuario= usuario
     
         }
         
@@ -14,4 +15,5 @@ export class Canciones {
         Genero: String ;
         imagen:String  ;
         Artista: String  ;
+        usuario:String;
 }
