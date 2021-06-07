@@ -12,11 +12,21 @@ const authRoutes = require('./routes/auth');
 const cors = require ('cors');
 const upload = require('./libs/multer');
 const path = require('path');
+const Pdfprinter = require('pdfmake')
+const fs = require ('fs')
+const fonts = require('./fonts');
+const styles = require('./styles');
+const {content} = require('./pdfContent');
 
+let docDefinition = {
+    content: content,
+    styles: styles
+}
+ const printer = new Pdfprinter(fonts);
 
-
-
-
+ let pdfDoc = printer.createPdfKitDocument(docDefinition);
+ pdfDoc.pipe(fs.createWriteStream("src/pdfs/"+Date.now()+".pdf"));
+ pdfDoc.end();
 
 
 
@@ -51,6 +61,8 @@ app.use('/api/generos', genderRoutes);
 app.use('/api/artistas', artistRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/uploads', express.static(path.resolve('uploads')));
+app.use('/pdfs', express.static(path.resolve('src/pdfs')));
+
 
 
 

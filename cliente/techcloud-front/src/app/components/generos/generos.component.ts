@@ -16,7 +16,9 @@ export class GenerosComponent implements OnInit {
     this.getGeneros()
     
   }
-
+  setTipo(tipo: string){
+    localStorage.setItem('genero', tipo)
+  }
   getGeneros(){
     this.generosService.getGenero()
       .subscribe(res =>{

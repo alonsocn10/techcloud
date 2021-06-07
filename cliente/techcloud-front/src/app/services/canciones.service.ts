@@ -23,19 +23,24 @@ export class CancionesService {
     return this.http.get(this.URL +'/'+ _id);
       
   }
-  postCanciones(nombre: string , Genero:string , Artista:string  , usuario: string , imagen: File ) {
+  postCanciones(nombre: string , Genero:string , Artista:string  , usuario: string , audio: File ) {
     const fd = new FormData();
         fd.append('nombre', nombre);
         fd.append('Genero', Genero);
         fd.append('Artista', Artista);
         fd.append('usuario', usuario);
-        fd.append('imagen', imagen);
+        fd.append('audio', audio);
     return this.http.post(this.URL, fd);
       
   };
-  putCanciones(canciones: Canciones, _id: string) {
-
-    return this.http.put(this.URL + '/' + _id, canciones);
+  putCanciones(nombre: string , Genero:string , Artista:string  , usuario: string , audio: File, _id: string) {
+    const fd = new FormData();
+        fd.append('nombre', nombre);
+        fd.append('Genero', Genero);
+        fd.append('Artista', Artista);
+        fd.append('usuario', usuario);
+        fd.append('audio', audio);
+    return this.http.put(this.URL + '/' + _id, fd);
       
   };
 

@@ -4,7 +4,7 @@
     <div class="alert alert-danger" *ngIf="errorMsg">
       {{errorMsg}}
     </div>
-    <form name="userForm" #userForm="ngForm" *ngIf ="!submitted" (ngSubmit)="newUser(userForm)" method="POST">
+    <form name="userForm" #userForm="ngForm" *ngIf ="!submitted" (ngSubmit)="newUser(nombre,apellido,email,fechaNacimiento,nombreUsuario,contrasenya,tipoUsuario,userForm)" method="POST">
     <label>
       <span>Nombre *</span>
       <input name="nombre" type="text" #nombre="ngModel" pattern="^[a-zA-Z ]*$"  [class.is-invalid]="nombre.invalid && nombre.touched" 

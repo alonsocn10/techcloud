@@ -11,14 +11,16 @@ import { GenerosService } from 'src/app/services/generos.service';
 export class GenerosCancionesComponent implements OnInit {
 
   constructor(public generosService:GenerosService, public cancionesService:CancionesService) { }
-
+  tipoGenero = localStorage.getItem('genero')
   ngOnInit(): void {
-    
+    this.getCanciones(this.tipoGenero);
   }
-  public getCanciones(tipo: number){
+  
+   getCanciones(tipo: string){
     this.generosService.getCanciones(tipo)
       .subscribe(res =>{
         this.cancionesService.canciones = res as Canciones[];
+        console.log(res)
       }
         )
   }

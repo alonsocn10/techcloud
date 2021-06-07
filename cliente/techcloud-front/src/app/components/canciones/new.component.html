@@ -27,22 +27,20 @@
         </div>
       </label>
       <label>
-        <span>Artista *</span>
-          <select  name="Artista" class="form-select" #Artista="ngModel"  [(ngModel)]="cancionesService.selectedCancion.Artista" [class.is-invalid]="Artista.invalid && Artista.touched"  required>
+        <span>Artista </span>
+          <select  name="Artista" class="form-select" #Artista="ngModel"  [(ngModel)]="cancionesService.selectedCancion.Artista" [class.is-invalid]="Artista.invalid && Artista.touched" >
             <option *ngFor="let artista of artistasService.artistas" value="{{artista.nombre}}">Nombre: {{artista.nombre}} | Genero: {{artista.genero}}</option>
           </select>
           <div *ngIf="Artista.errors && Artista.touched">
-            <small class="text-danger" *ngIf="Artista.errors.required">Este campo es obligatorio</small>
             <small class="text-danger" *ngIf="Artista.errors.pattern || Artista.errors.minlength || Artista.errors.maxlength">Este campo debe tener un numero entre 0 y 9</small>
           </div>
       </label>
       <label>
-        <span>Imagen *</span>
-        <span><img [src]="imgSelected || '../../assets/noImage.jpg'" class="img-fluid" alt="No image" (click)="imagenElegida.click()"></span>
-        <input name="imagen"type="file"  class="d-none" (change)="imagenElegida($event)" #imagen="ngModel" value="" minlength="5" 
-        [class.is-invalid]="imagen.invalid && imagen.touched" [(ngModel)]="cancionesService.selectedCancion.imagen" required>
-        <div *ngIf="imagen.touched || imagen.errors ">
-          <small class="text-danger" *ngIf="imagen.touched.required ">Este campo es obligatorio</small>
+        <span>Audio *</span>
+        <input name="audio"type="file"  (change)="imagenElegida($event)" #audio="ngModel" 
+        [class.is-invalid]="audio.invalid && audio.touched" [(ngModel)]="cancionesService.selectedCancion.audio" required>
+        <div *ngIf="audio.touched || audio.errors ">
+          <small class="text-danger" *ngIf="audio.touched.required ">Este campo es obligatorio</small>
         </div>
         
       </label>

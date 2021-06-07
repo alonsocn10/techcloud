@@ -26,6 +26,7 @@ import { GenerosplistComponent } from './components/generos/generosplist.compone
 import { CancionesplistComponent } from './components/canciones/cancionesplist.component';
 import { GenerosnewComponent } from './components/generos/generosnew.component';
 import { GenerosCancionesComponent } from './components/generos/generos-canciones.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { GenerosCancionesComponent } from './components/generos/generos-cancione
     GenerosplistComponent,
     CancionesplistComponent,
     GenerosnewComponent,
-    GenerosCancionesComponent
+    GenerosCancionesComponent,
+    ProfileComponent
 
   ],
   imports: [

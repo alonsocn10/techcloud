@@ -6,13 +6,15 @@ const {
     getCancion,
     replaceCancion,
     deleteCancion,
-    getGenero
+    getGenero,
+    getUsuarioSong
 } = require('../controllers/cancionctr');
 
 router.get('/', index);
-router.post('/', upload.single('imagen'),newCancion);
+router.post('/', upload.single('audio'),newCancion);
 router.get('/:cancionId', getCancion);
 router.get('/genero/:genero', getGenero);
+router.get('/usuario/:nombreUsuario', getUsuarioSong);
 router.put('/:cancionId', upload.single('audio'),replaceCancion);
 router.delete('/:cancionId', deleteCancion)
 

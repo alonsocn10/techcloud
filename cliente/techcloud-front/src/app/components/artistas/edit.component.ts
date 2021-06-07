@@ -22,9 +22,8 @@ export class EditComponent implements OnInit {
 
   constructor(public artistasService: ArtistasService,
     public router: Router,
-    public generosService: GenerosService,imagen: File, imgSelected: string | ArrayBuffer ) { 
-      this.imagen = imagen
-      this.imgSelected = imgSelected }
+    public generosService: GenerosService, ) { 
+      }
   
     imagenElegida(event: HtmlInputEvent): void {
       if (event.target.files && event.target.files[0]) {
@@ -40,7 +39,6 @@ ngOnInit(): void {
   this.getGeneros()
 }
 newArtist(nombre: HTMLInputElement,genero: HTMLInputElement,descrpcion: HTMLTextAreaElement, artistForm: NgForm){
-  console.log(nombre.value, genero.value, descrpcion.value, this.imagen)
 this.artistasService.postArtistas(nombre.value, genero.value, descrpcion.value, this.imagen)
 .subscribe( res=>{
 

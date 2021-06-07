@@ -35,7 +35,6 @@ export class ArtistasService {
       
   };
   putArtistas( _id: string, nombre: string , genero: string , descripcion:string, imagen: File ) {
-    console.log("hola")
     const fd = new FormData();
     fd.append('nombre', nombre);
     fd.append('genero', genero);

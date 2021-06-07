@@ -19,8 +19,7 @@ interface HtmlInputEvent extends Event {
   providers: [CancionesService]
 })
 export class NewSongComponent implements OnInit {
-  imagen: File;
-  imgSelected!: string | ArrayBuffer;
+  audio: File;
   constructor(public cancionesService: CancionesService,
     public router: Router,
     public generosService: GenerosService,
@@ -30,11 +29,10 @@ export class NewSongComponent implements OnInit {
     
     imagenElegida(event: HtmlInputEvent): void {
       if (event.target.files && event.target.files[0]) {
-        this.imagen = <File>event.target.files[0];
+        this.audio = <File>event.target.files[0];
         // image preview
         const reader = new FileReader();
-        reader.onload = e => this.imgSelected = reader.result;
-        reader.readAsDataURL(this.imagen);
+        reader.readAsDataURL(this.audio);
       }
     }
 ngOnInit(): void {
@@ -57,7 +55,7 @@ getSelect(){
 
 newSong(nombre: HTMLInputElement,Genero: HTMLInputElement,Artista: HTMLInputElement, cancionForm: NgForm){
    let id = this.authService.get_id()
-  this.cancionesService.postCanciones(nombre.value, Genero.value, Artista.value, id, this.imagen)
+  this.cancionesService.postCanciones(nombre.value, Genero.value, Artista.value, id, this.audio)
 .subscribe( res=>{
 
 this.resetForm(cancionForm)

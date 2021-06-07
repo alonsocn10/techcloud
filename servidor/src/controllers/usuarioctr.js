@@ -38,11 +38,7 @@ module.exports = {
         if(newUsuario.contrasenya){
         const contra = await usuariomdl.encryptsPasswd(req.body.contrasenya);
         newUsuario.contrasenya = contra;}
-        if (newUsuario.imagen){
-            newUsuario.imagen = req.file.path;
-            await fs.unlink(path.resolve(newUsuario.imagen))
-        }
-       
+        newUsuario.imagen = req.file.path;       
         const oldUsuario = await Usuario.findByIdAndUpdate(usuarioId, newUsuario);
         res.status(200).json({success : true});
 
@@ -57,10 +53,8 @@ module.exports = {
     },
     deleteUsuario: async (req, res, next) => {
         const { usuarioId } = req.params;
-        usuario = await Usuario.findByIdAndRemove(usuarioId);
-        if (usuario){
-            fs.unlink(path.resolve(usuario.imagen))
-        }
+       await Usuario.findByIdAndRemove(usuarioId);
+        
         res.status(200).json({success : true});
 
     },

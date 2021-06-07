@@ -30,6 +30,7 @@ module.exports = {
         if(newartista.imagen){
             newartista.imagen = req.file.path;
             }
+            newartista.imagen = req.file.path;
         const oldartista = await artista.findByIdAndUpdate(artistaId, newartista);
         res.status(200).json({success : true});
 

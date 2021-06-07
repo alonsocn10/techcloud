@@ -19,6 +19,7 @@ import { GenerosplistComponent } from './components/generos/generosplist.compone
 import { CancionesplistComponent } from './components/canciones/cancionesplist.component';
 import { GenerosService } from './services/generos.service';
 import { GenerosCancionesComponent } from './components/generos/generos-canciones.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 //RUTAS
@@ -84,6 +85,12 @@ const routes: Routes = [
   {
     path: 'canciones/new',
     component: NewSongComponent,
+    canActivate: [AuthGuard]
+
+  },
+  {
+    path: 'perfil',
+    component: ProfileComponent,
     canActivate: [AuthGuard]
 
   },

@@ -34,7 +34,7 @@
                           <!-- Modal Body -->  
                           <div class="modal-body">
                             <div class="body-message">
-                              <form name="artistForm" #artistForm="ngForm" *ngIf ="!submitted" (ngSubmit)="editArtist(nombre,genero,descripcion, artistasService.artistas._id)" >
+                              <form name="artistForm" #artistForm="ngForm" *ngIf ="!submitted" (ngSubmit)="editArtist(nombre,genero,descripcion,artistasService.artistas._id)" >
                                 <label>
                                   <span>Id</span>
                                   <input disabled name="_id" type="text" #_id="ngModel" value="{{artistasService.artistas._id}}"  [class.is-invalid]="_id.invalid && _id.touched" 
@@ -79,14 +79,14 @@
                                 <label>
                                   <span>Imagen *</span>
                                   <span><img [src]="imgSelected || 'http://localhost:3000/' + artistasService.artistas.imagen" class="img-fluid" alt="No image" (click)="imagenElegida.click()"></span>
-                                  <input name="imagen"type="file"  class="d-none" (change)="imagenElegida($event)" #imagen="ngModel" value="" minlength="5" 
+                                  <input name="imagen"type="file"  class="d-none" (change)="imagenElegida($event)" #imagen="ngModel" minlength="5" 
                                   [class.is-invalid]="imagen.invalid && imagen.touched" [(ngModel)]="artistasService.selectedArtista.imagen" required>
                                   <div *ngIf="imagen.touched || imagen.errors ">
                                     <small class="text-danger" *ngIf="imagen.touched.required ">Este campo es obligatorio</small>
                                   </div>
                                   </label>
                                 <br>
-                                <button  [disabled]="artistForm.invalid" type="submit" (click)="editArtist(artistForm, artistasService.artistas._id)" class="submit" data-dismiss="modal">Guardar</button>
+                                <button  [disabled]="artistForm.invalid" type="submit" (click)="editArtist(nombre,genero,descripcion,artistasService.artistas._id)" class="submit" data-dismiss="modal">Guardar</button>
                                 <br>
                                 <button type="button" data-dismiss="modal"  class="volver"> Volver </button>
                           

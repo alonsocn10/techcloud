@@ -56,6 +56,9 @@ export class LoginService {
       return this.http.get(this.URL + '/check');
         
     };
+    getNombreUsuario(){
+      return localStorage.getItem('nombreUsuario')
+    }
     esAdmin(){
       return localStorage.getItem('tipo')
     }

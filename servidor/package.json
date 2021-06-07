@@ -37,6 +37,7 @@
     "multiparty": "^4.2.2",
     "nodemon": "^2.0.7",
     "passport": "^0.4.1",
+    "pdfmake": "^0.1.71",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

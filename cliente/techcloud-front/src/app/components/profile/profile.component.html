@@ -1,0 +1,76 @@
+<header>
+    <div class="container text-center">
+
+        <!-- Logo -->
+        <div class="logo">
+            <img [src]="'http://localhost:3000/' + usuariosService.usuarios.imagen" class="img-logo" alt="" srcset="" width="20%">
+			  <h1><b>{{usuariosService.usuarios.nombre}} {{usuariosService.usuarios.apellido}}</b></h1>
+        </div>
+
+        <h1>Usuario</h1>
+
+    </div>
+</header>
+
+<div class="containerr">
+    <h4 class="text-center"><strong>Canciones</strong></h4>
+    <hr>
+    <div class="content-wrapper">
+  
+        <div class="news-card" *ngFor="let cancion of cancionesService.canciones | paginate: { itemsPerPage: 9, currentPage: page }">
+          <img [src]="'http://localhost:3000/' + cancion.imagen" alt="" class="news-card__image">
+          <div class="news-card__text-wrapper">
+            <h2 class="news-card__title">{{cancion.nombre}}</h2>
+            <div class="news-card__post-name">{{cancion.artista}}</div>
+            <div class="news-card__details-wrapper">
+                <button  (click)="getCancionId(cancion._id)"  data-toggle="modal" data-target=".bs-example-modal-delete" class="delete"><i class="material-icons">Eliminar</i></button> 
+                         </div>
+          </div>
+        </div>
+        <pagination-controls (pageChange)="page = $event" class="paginator"></pagination-controls>
+      </div>
+      <div class="container">
+        <div class="row">
+    <div class="modal fade bs-example-modal-delete"  role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                  
+        <div class="modal-dialog">
+          
+          <!-- Modal Content: begins -->
+          <div class="modal-content">
+            
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title" id="gridSystemModalLabel">Delete Cancion</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="material-icons">close</i></button>
+                
+            </div>
+          
+            <!-- Modal Body -->  
+            <div class="modal-body">
+              <div class="body-message">
+                <h4>Estas seguro que quieres eliminar esta cancion?</h4> <br>
+                Id: {{cancionesService.canciones._id}}  <br>
+                Nombre: {{cancionesService.canciones.nombre}}<br>
+                <br>
+                <button type="submit"(click)="deleteCancion(cancionesService.canciones._id)" class="submit" data-dismiss="modal">Eliminar</button>
+                <br>
+                <button type="button" class="volver" routerLink="/canciones" data-dismiss="modal"> Volver  </button>
+              </div>
+            </div>
+          
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+              
+              
+            </div>
+          
+          
+          </div>
+          <!-- Modal Content: ends -->
+          
+        </div>
+        
+      </div>
+      </div>
+      </div>
+</div>

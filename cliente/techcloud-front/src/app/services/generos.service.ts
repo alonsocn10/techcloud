@@ -35,8 +35,8 @@ export class GenerosService {
       
   };
 
-  getCanciones(tipo: number){
-    return this.http.get(this.URL + '/generos' + tipo)
+  getCanciones(tipo: string){
+    return this.http.get(this.URL_2 + '/genero/' + tipo)
   }
 
   deleteGeneros(_id: string) {

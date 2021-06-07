@@ -6,7 +6,7 @@
     <form name="loginForm" #loginForm="ngForm"  (ngSubmit)="logIn(loginForm)" validate>
     <label>
       <span>Nombre de Usuario</span>    
-      <input name="nombreUsuario"type="text" #nombreUsuario="ngModel" minlength="3" maxlength="20" pattern="[a-zA-ZñÑ]*"
+      <input name="nombreUsuario"type="text" #nombreUsuario="ngModel" minlength="3" maxlength="30" pattern="[a-zA-ZñÑ]*"
          [(ngModel)]="loginService.selectedLogin.nombreUsuario" [class.is-invalid]="nombreUsuario.invalid && nombreUsuario.touched" required/>
          <div *ngIf="nombreUsuario.errors && nombreUsuario.touched">
           <small class="text-danger" *ngIf="nombreUsuario.errors.required">Este campo es obligatorio</small>
@@ -52,7 +52,7 @@
       <form name="singUpForm" #singUpForm="ngForm" *ngIf ="!submitted" (ngSubmit)="singUp(nombre,apellido,email,fechaNacimiento,nombreUsuario,contrasenya, singUpForm)" validate>
         <label>
         <span>Nombre *</span>
-        <input name="nombre"type="text" #nombre="ngModel" minlength="3" maxlength="10" pattern="[a-zA-ZñÑ]*"
+        <input name="nombre"type="text" #nombre="ngModel" minlength="3" maxlength="30" pattern="[a-zA-ZñÑ]*"
          [(ngModel)]="loginService.selectedSingUp.nombre" [class.is-invalid]="nombre.invalid && nombre.touched" required/>
          <div *ngIf="nombre.errors && nombre.touched">
           <small class="text-danger" *ngIf="nombre.errors.required">Este campo es obligatorio</small>
@@ -61,7 +61,7 @@
       </label>
       <label>
         <span>Apellidos *</span>
-        <input name="apellido"type="text" #apellido="ngModel" minlength="3" maxlength="10" pattern="[a-zA-ZñÑ]*"
+        <input name="apellido"type="text" #apellido="ngModel" minlength="3" maxlength="30" pattern="[a-zA-ZñÑ]*"
         [class.is-invalid]="apellido.invalid && apellido.touched" [(ngModel)]="loginService.selectedSingUp.apellido" required/>
         <div *ngIf="apellido.errors && apellido.touched">
           <small class="text-danger" *ngIf="apellido.errors.required">Este campo es obligatorio</small>

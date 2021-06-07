@@ -11,6 +11,7 @@ export class UsuariosService {
 
   selectedUsuario: Usuarios;
   readonly URL = "http://localhost:3000/api/usuarios"
+  readonly URL_2 = "http://localhost:3000/api/canciones"
   usuarios: Usuarios[] = [];
   constructor(public http: HttpClient) { 
     this.selectedUsuario = new Usuarios();
@@ -27,7 +28,7 @@ export class UsuariosService {
         
     }
 
-    postUsuarios(nombre: string , apellido: string , email:string  , nombreUsuario: string , contrasenya: string  , fechaNacimiento: string,
+    postUsuarios(nombre: string , apellido: string , email:string  , nombreUsuario: string , contrasenya: string  , fechaNacimiento: string, tipoUsuario: string,
       imagen: File) {
         const fd = new FormData();
         fd.append('nombre', nombre);
@@ -36,6 +37,7 @@ export class UsuariosService {
         fd.append('nombreUsuario', nombreUsuario);
         fd.append('contrasenya', contrasenya);
         fd.append('fechaNacimiento', fechaNacimiento);
+        fd.append('tipoUsuario', tipoUsuario);
         fd.append('imagen', imagen);
 
       return this.http.post(this.URL, fd);
@@ -60,6 +62,10 @@ export class UsuariosService {
       return this.http.delete(this.URL +'/'+ _id);
         
     };
+
+    getCanciones(nombreUsuario: string){
+      return this.http.get(this.URL_2 + '/usuario/' + nombreUsuario)
+    }
 
   
   
