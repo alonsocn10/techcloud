@@ -2,17 +2,23 @@ const  jwt = require ('jsonwebtoken');
 const usuariomdl = require  ('../models/usuariomdl');
 const tipoUsuario = require  ('../models/tipoUsuariomdl');
 const config = require('../../config');
+const req  = require('express')
+const res  = require('express')
 
+const path = require('path');
+const fs = require('fs')
 
 module.exports = {
- singUp: async (req, res) =>{
+ singUp: async (req, res)  =>{
     const newUsuario = new usuariomdl(req.body);
+    console.log(req.body)
     const tipoUs = await tipoUsuario.findOne({ tipo: 2 });
     newUsuario.tipoUsuario = tipoUs.tipo;
+    newUsuario.imagen = req.file.path
     const contra = await usuariomdl.encryptsPasswd(req.body.contrasenya);
     newUsuario.contrasenya = contra;
     if (!newUsuario.imagen) {
-        newUsuario.imagen = 'usuario.jpg';
+        newUsuario.imagen = 'uploads\\1621238028830.png';
     }
     const usuario = await newUsuario.save();
     const token = jwt.sign({id: usuario._id },'config.SECRET', {expiresIn : 86400})
@@ -32,7 +38,8 @@ module.exports = {
         return res.status(400).json({ token: null, message: 'Contraseña incorrecta' });
         const token=jwt.sign({id: userFound._id },'config.SECRET', {expiresIn : 86400})   
         const tipo = await userFound.tipoUsuario
-         res.json({ token,tipo });
+        const _id = await userFound._id
+         res.json({ token,tipo, _id });
 
 }
 ,
@@ -47,7 +54,8 @@ module.exports = {
         return res.status(400).json({ token: null, message: 'Contraseña incorrecta' });
         const token=jwt.sign({id: userFound._id },'config.SECRET', {expiresIn : 86400})   
         const tipo = await userFound.tipoUsuario
-         res.json({ token,tipo });
+        const nombreUsuario = await userFound.nombreUsuario
+         res.json({ token,tipo, nombreUsuario });
          
 
 },
@@ -60,7 +68,7 @@ module.exports = {
         const decoded = jwt.verify(token, 'config.SECRET')
         req.usuarioid = decoded.id  
         const usuario = await usuariomdl.findById(req.usuarioid)
-        res.status(200).json(usuario.nombreUsuario)
+        res.status(200).json(usuario);
 
     }
 }

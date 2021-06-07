@@ -2,7 +2,7 @@
   
 	<div class="news-card" *ngFor="let artista of artistasService.artistas | paginate: { itemsPerPage: 9, currentPage: page }">
 	  <a href="#" class="news-card__card-link"></a>
-	  <img src="{{artista.imagen}}" alt="" class="news-card__image">
+	  <img [src]="'http://localhost:3000/' + artista.imagen" alt="" class="news-card__image">
 	  <div class="news-card__text-wrapper">
 		<h2 class="news-card__title">{{artista.nombre}}</h2>
 		<div class="news-card__post-name">{{artista.genero}}</div>

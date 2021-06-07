@@ -9,6 +9,8 @@ export class GenerosService {
 
   selectedGenero: Generos;
   readonly URL = "http://localhost:3000/api/generos"
+  readonly URL_2 = "http://localhost:3000/api/canciones"
+
   generos: Generos[] = [];
   constructor(public http: HttpClient) { 
     this.selectedGenero = new Generos();
@@ -32,6 +34,10 @@ export class GenerosService {
     return this.http.put(this.URL + '/' + _id, generos);
       
   };
+
+  getCanciones(tipo: string){
+    return this.http.get(this.URL_2 + '/genero/' + tipo)
+  }
 
   deleteGeneros(_id: string) {
 

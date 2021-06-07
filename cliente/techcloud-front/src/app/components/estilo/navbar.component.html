@@ -15,7 +15,7 @@
         </ul>
     <div class="buttons">
       <ul class="nav-list">
-      <li><a *ngIf="loginService.loggedIn()" routerLinkActive >{{loginService.nombreUsuario.nombreUsuario}}</a></li>
+      <li><a *ngIf="loginService.loggedIn()" routerLinkActive  routerLink="/perfil">Mi cuenta</a></li>
         <li *ngIf="!loginService.loggedIn()" ><a routerLink="/login" routerLinkActive>Login</a></li>
         <li *ngIf="loginService.loggedIn()"  (click)="loginService.logOut()" ><a   routerLinkActive>Logout</a></li>
       </ul>

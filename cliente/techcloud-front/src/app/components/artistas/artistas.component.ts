@@ -22,7 +22,6 @@ export class ArtistasComponent implements OnInit {
     this.artistasService.getArtistas()
       .subscribe(res =>{
         this.artistasService.artistas = res as Artistas[];
-        console.log(res)
       }
         )
   }

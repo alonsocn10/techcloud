@@ -1,4 +1,6 @@
 const artista = require('../models/artistamdl'); 
+const path = require('path');
+const fs = require('fs')
 
 module.exports = {
 
@@ -11,6 +13,7 @@ module.exports = {
     },
     newArtista: async (req, res, next) => {
         const newartista = new artista(req.body);
+        newartista.imagen = req.file.path;
         const artistas = await newartista.save();
         res.status(200).json(artistas);
 
@@ -24,6 +27,10 @@ module.exports = {
     replaceArtista: async (req, res, next) => {
         const { artistaId } = req.params;
         const newartista = req.body;
+        if(newartista.imagen){
+            newartista.imagen = req.file.path;
+            }
+            newartista.imagen = req.file.path;
         const oldartista = await artista.findByIdAndUpdate(artistaId, newartista);
         res.status(200).json({success : true});
 
@@ -31,6 +38,9 @@ module.exports = {
     updateArtista: async (req, res, next) => {
         const { artistaId } = req.params;
         const newartista = req.body;
+        if(newartista.imagen){
+        newartista.imagen = req.file.path;
+        }
         const oldartista = await artista.findByIdAndUpdate(artistaId, newartista);
         res.status(200).json({success : true});
 

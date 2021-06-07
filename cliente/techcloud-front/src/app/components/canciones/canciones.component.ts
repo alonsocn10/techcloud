@@ -20,7 +20,6 @@ export class CancionesComponent implements OnInit {
     this.cancionesService.getCanciones()
       .subscribe(res =>{
         this.cancionesService.canciones = res as Canciones[];
-        console.log(res)
       }
         )
   }

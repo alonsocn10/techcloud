@@ -9,21 +9,15 @@ const CancionSchema = new Schema({
         ref: 'artistas'
 
     },
-    nomUsuario: {
-        type: String,
-        ref :'nombreUsuario'
-
-    },
+    usuario: String,
     Genero: {
         type: Number,
         ref :'tipo'
     },
-    imagen: Object,
+    imagen: String,
     Descripcion: String,
-    length  :  Number , 
-    chunkSize :  Number  , 
-    uploadDate: Date  , 
-    filename:   String  
+    audio  :  String , 
+     
     
 });
 

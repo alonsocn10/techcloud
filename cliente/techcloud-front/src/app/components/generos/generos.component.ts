@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Generos } from 'src/app/models/generos';
 import { GenerosService } from 'src/app/services/generos.service';
+import { GenerosCancionesComponent } from './generos-canciones.component';
 
 @Component({
   selector: 'app-generos',
@@ -13,12 +14,15 @@ export class GenerosComponent implements OnInit {
 
   ngOnInit(): void {
     this.getGeneros()
+    
+  }
+  setTipo(tipo: string){
+    localStorage.setItem('genero', tipo)
   }
   getGeneros(){
     this.generosService.getGenero()
       .subscribe(res =>{
         this.generosService.generos = res as Generos[];
-        console.log(res)
       }
         )
   }

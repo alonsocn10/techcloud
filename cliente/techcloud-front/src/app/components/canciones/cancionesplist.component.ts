@@ -6,19 +6,30 @@ import { Generos } from 'src/app/models/generos';
 import { ArtistasService } from 'src/app/services/artistas.service';
 import { CancionesService } from 'src/app/services/canciones.service';
 import { GenerosService } from 'src/app/services/generos.service';
-
+import { LoginService } from 'src/app/services/login.service';
+interface HtmlInputEvent extends Event {
+  target: HTMLInputElement & EventTarget;
+}
 @Component({
   selector: 'app-cancionesplist',
   templateUrl: './cancionesplist.component.html',
   styleUrls: ['./cancionesplist.component.css']
 })
 export class CancionesplistComponent implements OnInit {
-
+  audio: File;
   constructor(public cancionesService: CancionesService,
               public generosService: GenerosService,
-              public artistasService: ArtistasService) { }
+              public artistasService: ArtistasService,
+              public authService: LoginService,  ) { }
 
-
+  imagenElegida(event: HtmlInputEvent): void {
+    if (event.target.files && event.target.files[0]) {
+      this.audio = <File>event.target.files[0];
+      // image preview
+      const reader = new FileReader();
+      reader.readAsDataURL(this.audio);
+    }
+  }
   ngOnInit(): void {
     this.getCanciones();
   }
@@ -26,12 +37,13 @@ export class CancionesplistComponent implements OnInit {
     this.cancionesService.getCanciones()
       .subscribe(res =>{
         this.cancionesService.canciones = res as Canciones[];
-        console.log(res)
       }
         )
   }
-  editCancion(cancionFomr: NgForm, _id: string){
-    this.cancionesService.putCanciones(cancionFomr.value, _id)
+  editCancion(nombre: HTMLInputElement,Genero: HTMLInputElement,Artista: HTMLInputElement, cancionForm: NgForm, _id: string){
+    console.log("llega");
+    let id = this.authService.get_id()
+    this.cancionesService.putCanciones(nombre.value, Genero.value, Artista.value, id, this.audio, _id)
       .subscribe( res => {
         this.cancionesService.canciones = res as Canciones[]
         this.getCanciones()
@@ -67,7 +79,6 @@ export class CancionesplistComponent implements OnInit {
       this.cancionesService.deleteCanciones(_id)
     .subscribe(res =>{
       this.getCanciones()
-     console.log(res)
     })
     
   }

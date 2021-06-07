@@ -11,6 +11,7 @@
               <th>Fecha Nacimiento</th>
               <th>Tipo Usuario</th>
               <th>Acciones</th>
+              <th><button type="submit"><a href="http://localhost:3000/pdfs/1623082743322.pdf" target="_blank" class="pdf"><i class="material-icons">picture_as_pdf</i></a></button></th>
             </thead>
             <tbody>
               <tr *ngFor="let usuario of usuariosService.usuarios | paginate: { itemsPerPage: 10, currentPage: page }" >
@@ -41,7 +42,7 @@
                         <!-- Modal Body -->  
                         <div class="modal-body">
                           <div class="body-message">
-                            <form name="userForm" #userForm="ngForm" *ngIf ="!submitted" (ngSubmit)="editUsuario(userForm, usuariosService.usuarios._id)" validate>
+                            <form name="userForm" #userForm="ngForm" *ngIf ="!submitted" (ngSubmit)="editUsuario(nombre,apellido,email,fechaNacimiento,nombreUsuario,contrasenya,userForm,usuariosService.usuarios._id)" validate>
                               <label>
                                 <span>Id</span>
                                 <input name="id"type="text" disabled #id="ngModel" value="{{usuariosService.usuarios._id}}"
@@ -105,8 +106,18 @@
                                   <small class="text-danger" *ngIf="contrasenya.errors.minlength">Este campo debe tener entre 3 y 20 carácteres</small>
                                 </div>
                             </label>
+                            <label>
+                              <span>Imagen *</span>
+                              <span><img [src]="imgSelected || 'http://localhost:3000/' + usuariosService.usuarios.imagen" class="img-fluid" alt="No image" (click)="imagenElegida.click()"></span>
+                              <input name="imagen"type="file"  class="d-none" (change)="imagenElegida($event)" #imagen="ngModel" value="" minlength="5" 
+                              [class.is-invalid]="imagen.invalid && imagen.touched" [(ngModel)]="usuariosService.selectedUsuario.imagen" required>
+                              <div *ngIf="imagen.touched || imagen.errors ">
+                                <small class="text-danger" *ngIf="imagen.touched.required ">Este campo es obligatorio</small>
+                              </div>
+                              </label>
+                           
                            <br>
-                            <button type="submit" [disabled]="userForm.invalid" class="submit" (click)="editUsuario(userForm, usuariosService.usuarios._id)" data-dismiss="modal">Guardar</button>
+                            <button type="submit" [disabled]="userForm.invalid" class="submit" (click)="editUsuario(nombre,apellido,email,fechaNacimiento,nombreUsuario,contrasenya,userForm,usuariosService.usuarios._id)" data-dismiss="modal">Guardar</button>
                             <br>
                             <button type="button" class="volver" routerLink="/usuarios" data-dismiss="modal"> Volver  </button>
                           </form> 

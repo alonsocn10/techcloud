@@ -1,7 +1,7 @@
 
 export class Usuarios {
     
-    constructor(_id= '', nombre= '', apellido='', email='', nombreUsuario='', contrasenya='',fechaNacimiento='2001-02-03T23:00:00.000Z', tipoUsuario = 0 ){
+    constructor(_id= '', nombre= '', apellido='', email='', nombreUsuario='', contrasenya='',fechaNacimiento='2001-02-03T23:00:00.000Z', tipoUsuario = 0 , imagen = ''){
     this._id= _id ;
     this.nombre= nombre ;
     this.apellido= apellido ;
@@ -10,6 +10,7 @@ export class Usuarios {
     this.contrasenya= contrasenya  ;
     this.fechaNacimiento= fechaNacimiento;
     this.tipoUsuario= tipoUsuario;
+    this.imagen = imagen;
 
     }
     
@@ -22,4 +23,5 @@ export class Usuarios {
     contrasenya: String  ;
     fechaNacimiento: String;
     tipoUsuario: Number;
+    imagen: String;
 }

@@ -17,6 +17,9 @@ import { GenerosnewComponent } from './components/generos/generosnew.component';
 import { GenerosComponent } from './components/generos/generos.component';
 import { GenerosplistComponent } from './components/generos/generosplist.component';
 import { CancionesplistComponent } from './components/canciones/cancionesplist.component';
+import { GenerosService } from './services/generos.service';
+import { GenerosCancionesComponent } from './components/generos/generos-canciones.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 //RUTAS
@@ -86,8 +89,19 @@ const routes: Routes = [
 
   },
   {
+    path: 'perfil',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
+
+  },
+  {
     path: 'generos',
     component: GenerosComponent,
+
+  },
+  {
+    path: 'generos/songs',
+    component: GenerosCancionesComponent,
 
   },
   {

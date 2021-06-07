@@ -36,6 +36,13 @@ button{
     .new{
         color: rgb(22, 148, 5);
     }
+    a{         
+        font-variant: normal;
+    }
+    .pdf{
+        border: none;
+        color: rgb(63, 64, 80);
+    }
     .wrap { padding: 15px; }
 h1 { font-size: 28px; }
 h4,

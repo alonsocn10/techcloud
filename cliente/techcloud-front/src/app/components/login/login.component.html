@@ -2,13 +2,11 @@
 <div class="cont">
   <div class="form sign-in">
     <h2>Bienvenido</h2>
-    <div class="alert alert-danger" *ngIf="errorMsg">
-      {{errorMsg}}
-    </div>
+    
     <form name="loginForm" #loginForm="ngForm"  (ngSubmit)="logIn(loginForm)" validate>
     <label>
       <span>Nombre de Usuario</span>    
-      <input name="nombreUsuario"type="text" #nombreUsuario="ngModel" minlength="3" maxlength="20" pattern="[a-zA-ZñÑ]*"
+      <input name="nombreUsuario"type="text" #nombreUsuario="ngModel" minlength="3" maxlength="30" pattern="[a-zA-ZñÑ]*"
          [(ngModel)]="loginService.selectedLogin.nombreUsuario" [class.is-invalid]="nombreUsuario.invalid && nombreUsuario.touched" required/>
          <div *ngIf="nombreUsuario.errors && nombreUsuario.touched">
           <small class="text-danger" *ngIf="nombreUsuario.errors.required">Este campo es obligatorio</small>
@@ -24,6 +22,9 @@
           <small class="text-danger" *ngIf="contrasenya.errors.minlength"> Este campo debe tener entre 3 y 20 carácteres</small>
         </div>
     </label>
+    <div class="alert alert-danger" *ngIf="errorMsg">
+      {{errorMsg}}
+    </div>
     <button [disabled]="loginForm.invalid"type="submit" class="submit">Log In</button>
    
   </form>
@@ -48,10 +49,10 @@
       <div class="alert alert-danger" *ngIf="errorMsg">
         {{errorMsg}}
       </div>
-      <form name="singUpForm" #singUpForm="ngForm" *ngIf ="!submitted" (ngSubmit)="singUp(singUpForm)" validate>
+      <form name="singUpForm" #singUpForm="ngForm" *ngIf ="!submitted" (ngSubmit)="singUp(nombre,apellido,email,fechaNacimiento,nombreUsuario,contrasenya, singUpForm)" validate>
         <label>
         <span>Nombre *</span>
-        <input name="nombre"type="text" #nombre="ngModel" minlength="3" maxlength="10" pattern="[a-zA-ZñÑ]*"
+        <input name="nombre"type="text" #nombre="ngModel" minlength="3" maxlength="30" pattern="[a-zA-ZñÑ]*"
          [(ngModel)]="loginService.selectedSingUp.nombre" [class.is-invalid]="nombre.invalid && nombre.touched" required/>
          <div *ngIf="nombre.errors && nombre.touched">
           <small class="text-danger" *ngIf="nombre.errors.required">Este campo es obligatorio</small>
@@ -60,7 +61,7 @@
       </label>
       <label>
         <span>Apellidos *</span>
-        <input name="apellido"type="text" #apellido="ngModel" minlength="3" maxlength="10" pattern="[a-zA-ZñÑ]*"
+        <input name="apellido"type="text" #apellido="ngModel" minlength="3" maxlength="30" pattern="[a-zA-ZñÑ]*"
         [class.is-invalid]="apellido.invalid && apellido.touched" [(ngModel)]="loginService.selectedSingUp.apellido" required/>
         <div *ngIf="apellido.errors && apellido.touched">
           <small class="text-danger" *ngIf="apellido.errors.required">Este campo es obligatorio</small>
@@ -77,6 +78,28 @@
         </div>
       </label>
       <label>
+        <span>Fecha de Nacimiento *</span>
+        <input name="fechaNacimiento"type="date" #fechaNacimiento="ngModel" value="" minlength="5" 
+        [class.is-invalid]="fechaNacimiento.invalid && fechaNacimiento.touched" [(ngModel)]="loginService.selectedSingUp.fechaNacimiento" required/>
+        <div *ngIf="fechaNacimiento.touched || fechaNacimiento.errors ">
+          <small class="text-danger" *ngIf="fechaNacimiento.touched.required ">Este campo es obligatorio</small>
+          <small class="text-danger" *ngIf="HttpErrorResponse">Hay errores</small>
+
+        </div>
+      </label>
+      <label>
+        <span>Imagen *</span>
+        <br>
+        <span><img [src]="imgSelected || '../../assets/noImage.jpg'" class="img-fluid" alt="No image" (click)="imagenElegida.click()" width="50%"></span>
+        <input name="imagen"type="file"  class="d-none" (change)="imagenElegida($event)" #imagen="ngModel" value="" minlength="5" 
+        [class.is-invalid]="imagen.invalid && imagen.touched" [(ngModel)]="loginService.selectedSingUp.imagen" required>
+        <div *ngIf="imagen.touched || imagen.errors ">
+          <small class="text-danger" *ngIf="imagen.touched.required ">Este campo es obligatorio</small>
+        </div>
+        
+      </label>
+    
+      <label>
         <span>Nombre de Usuario *</span>    
         <input name="nombreUsuario"type="text" #nombreUsuario="ngModel" minlength="3" maxlength="20" pattern="[a-zA-ZñÑ]*"
            [(ngModel)]="loginService.selectedSingUp.nombreUsuario" [class.is-invalid]="nombreUsuario.invalid && nombreUsuario.touched" required/>
@@ -86,14 +109,6 @@
           </div>
         </label>
       <label>
-        <span>Fecha de Nacimiento *</span>
-        <input name="fechaNacimiento"type="date" #fechaNacimiento="ngModel" value="" minlength="5" 
-        [class.is-invalid]="fechaNacimiento.invalid && fechaNacimiento.touched" [(ngModel)]="loginService.selectedSingUp.fechaNacimiento" required/>
-        <div *ngIf="fechaNacimiento.touched || fechaNacimiento.errors ">
-          <small class="text-danger" *ngIf="fechaNacimiento.touched.required ">Este campo es obligatorio</small>
-        </div>
-      </label>
-      <label>
         <span>Contraseña *</span>
         <input name="contrasenya"type="password" #contrasenya="ngModel" minlength="3" maxlength="20" 
            [(ngModel)]="loginService.selectedSingUp.contrasenya" [class.is-invalid]="contrasenya.invalid && contrasenya.touched" required/>
@@ -102,6 +117,7 @@
             <small class="text-danger" *ngIf="contrasenya.errors.minlength"> Este campo debe tener entre 3 y 20 carácteres</small>
           </div>
       </label>
+      
       <button type="submit" class="submit">Sign Up</button>
     </form>
     </div>
